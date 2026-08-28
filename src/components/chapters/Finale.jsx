@@ -56,9 +56,9 @@ const Finale = () => {
             editoriale non ufficiale, realizzato a scopo di concept.
           </p>
           <p>
-            Tipografia: Archivo, IBM Plex Mono (Google Fonts). Geografie:
-            Natural Earth via world-atlas. Visualizzazioni: elaborazione
-            originale dei dati di bilancio.
+            Tipografia: Roboto, Roboto Mono (Google Fonts). Geografie: Natural
+            Earth via world-atlas. Visualizzazioni: elaborazione originale dei
+            dati di bilancio.
           </p>
         </footer>
       </div>

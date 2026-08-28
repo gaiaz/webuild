@@ -26,7 +26,10 @@ e `webuild-preview` (build di produzione, per verificare prima di deployare).
 - **GSAP 3 + ScrollTrigger** per tutta la scroll choreography (pin + scrub)
 - **d3-geo + topojson-client + world-atlas** solo per le mappe (mondo e Italia)
 - CSS puro con custom properties, **BEM**, un file CSS co-locato per componente
-- Font: **Archivo variable** (display, font-stretch 76–82% per i titoli) + **IBM Plex Mono** (annotazioni tecniche), da Google Fonts in `index.html`
+- Font: **Roboto variable** (display, `font-stretch` 76–82% per i titoli — asse
+  wdth 75–100) + **Roboto Mono** (annotazioni tecniche), da Google Fonts nelle
+  due entry HTML. Sono i font usati da webuildgroup.com: la scelta è di fedeltà
+  al brand, non estetica. Non reintrodurre Archivo/IBM Plex Mono.
 
 ## Concept creativo
 
@@ -77,9 +80,15 @@ App.jsx raggruppa le scene nei **5 capitoli macro** con id: `growth`, `future`,
   Mai font-size hardcoded nei componenti.
 - **Margini container**: 16px mobile / 40px tablet / 80px desktop, max-width 1440 centrato
   (già incapsulati in `.container`)
-- **Colori**: primitive `--wb-*` solo in tokens.css; nei componenti solo token
-  semantici (`--color-accent` = rosso Webuild #e1251b, `--color-bg-base` paper,
-  `--color-bg-night`, `--color-bg-forest`, ecc.)
+- **Colori — palette Webuild ufficiale**, rilevata dai colori computati di
+  webuildgroup.com. Primitive `--wb-*` solo in tokens.css; nei componenti solo
+  token semantici:
+  - `--color-accent` = **#db002f** (rosso Webuild)
+  - `--color-accent-on-dark` = **#ee2148**, obbligatorio per il **testo piccolo
+    su fondo scuro**: il rosso brand su nero dà 4,05:1, sotto AA. Non usare
+    `--color-accent` per le annotazioni dentro `.theme-night`/`.theme-forest`.
+  - `--color-bg-night` = **#000** nero puro · `--color-bg-base` = bianco
+  - testo `#1f1f1f`, secondario `#5f5f5f`, su scuro `#a0a0a0`
 - **BEM** rigoroso: `.blocco__elemento--modificatore`, kebab-case, un solo livello
   di elemento, niente selettori annidati per specificità
 - HTML semantico: un solo h1 (sr-only in App), h2 per sezione con `aria-labelledby`,

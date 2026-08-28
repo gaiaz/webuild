@@ -211,7 +211,8 @@ const Chiusura = () => {
         <p>
           Fonte: factsheet testi Pedelombarda, versione italiana del 28 luglio
           2026. Prototipo editoriale non ufficiale, realizzato a scopo di
-          concept. Tipografia: Archivo, IBM Plex Mono (Google Fonts).
+          concept. Tipografia: Roboto, Roboto Mono (Google Fonts). Marchio e
+          colori istituzionali Webuild.
         </p>
         </div>
       </div>
