@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useSceneTimeline } from '../../lib/useSceneTimeline'
 import './Opening.css'
+import ScrollHint from '../ScrollHint'
 
 /**
  * 01a — Apertura. Minimale: 2025, la linea che si traccia,
@@ -25,7 +26,7 @@ const Opening = () => {
           { yPercent: 0, duration: 0.9, stagger: 0.18, ease: 'power2.out' },
           '-=0.4'
         )
-        .fromTo('.opening__hint', { opacity: 0 }, { opacity: 1, duration: 0.4 })
+        // ScrollHint non entra in questa timeline: si anima da sé in CSS
         .to({}, { duration: 0.6 }) // respiro finale prima dell'uscita dal pin
     },
     { end: '+=380%' }
@@ -65,9 +66,7 @@ const Opening = () => {
         ))}
       </h2>
 
-      <p className="opening__hint annotation" aria-hidden="true">
-        Scorri — la costruzione inizia qui ↓
-      </p>
+      <ScrollHint label="Scorri — la costruzione inizia qui" />
     </section>
   )
 }

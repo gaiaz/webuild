@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { REDUCED_MOTION } from '../lib/gsap'
 import TraceNav from '../components/TraceNav'
 import SiteHeader from '../components/SiteHeader'
+import ScrollHint from '../components/ScrollHint'
 import { PEDE_CHAPTERS } from '../data/pedemontana'
 import Hero from './scenes/Hero'
 import Sistema from './scenes/Sistema'
@@ -70,6 +71,10 @@ const PedemontanaApp = () => {
           <Chiusura />
         </div>
       </main>
+
+      {/* Richiamo discreto: compare solo se ci si ferma a meta' percorso,
+          soprattutto sulle scene pinnate dove la pagina sembra ferma */}
+      <ScrollHint mode="idle" />
     </>
   )
 }

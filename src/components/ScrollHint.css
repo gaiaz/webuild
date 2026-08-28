@@ -1,0 +1,128 @@
+/* ─── ScrollHint — invito allo scroll, condiviso fra le pagine ───
+   Eredita il colore dal contesto (.theme-night, .theme-forest o chiaro),
+   quindi non serve una variante per tema. */
+.scroll-hint {
+  left: 50%;
+  translate: -50% 0;
+  z-index: var(--z-above);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+
+  opacity: 1;
+  transition: opacity var(--transition-normal), translate var(--transition-normal);
+}
+
+/* Apertura: dentro la hero, sopra il bordo inferiore */
+.scroll-hint--intro {
+  position: absolute;
+  bottom: var(--space-8);
+}
+
+/* Richiamo a metà percorso: fisso, più compatto e defilato.
+   Attraversa sezioni chiare e scure, quindi invece di inseguire il tema usa
+   `difference`: in bianco pieno resta sempre l'inverso del fondo, cioè
+   sempre leggibile. Qui rinuncio al rosso — sotto `difference` darebbe tinte
+   imprevedibili — perché è un segnale di servizio, non un momento di brand. */
+.scroll-hint--idle {
+  position: fixed;
+  bottom: var(--space-6);
+  z-index: var(--z-sticky);
+  gap: var(--space-2);
+  mix-blend-mode: difference;
+  color: #ffffff;
+}
+
+.scroll-hint--idle .scroll-hint__label {
+  font-size: 10px;
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+.scroll-hint--idle .scroll-hint__rail {
+  height: 30px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.scroll-hint--idle .scroll-hint__trace {
+  background: linear-gradient(to bottom, transparent, #ffffff 85%, #ffffff);
+}
+
+/* Sul richiamo discreto l'hover non deve virare al rosso sotto difference */
+.scroll-hint--idle:hover .scroll-hint__label,
+.scroll-hint--idle:focus-visible .scroll-hint__label {
+  color: #ffffff;
+  opacity: 1;
+}
+
+/* Ha esaurito il suo compito: l'utente ha capito che si scrolla */
+.scroll-hint--gone {
+  opacity: 0;
+  translate: -50% 10px;
+  pointer-events: none;
+}
+
+.scroll-hint__label {
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+}
+
+.scroll-hint:hover .scroll-hint__label,
+.scroll-hint:focus-visible .scroll-hint__label {
+  color: var(--color-accent);
+}
+
+/* Guida verticale: la "linea che costruisce" in miniatura */
+.scroll-hint__rail {
+  position: relative;
+  width: 1px;
+  height: 44px;
+  overflow: hidden;
+  background: color-mix(in srgb, currentColor 28%, transparent);
+}
+
+.scroll-hint__trace {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 60%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--color-accent) 85%,
+    var(--color-accent)
+  );
+  translate: 0 -100%;
+  animation: scroll-hint-trace 1900ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes scroll-hint-trace {
+  0% {
+    translate: 0 -100%;
+  }
+  55%,
+  100% {
+    translate: 0 167%; /* percorre guida (100%) + propria altezza (60%) */
+  }
+}
+
+.scroll-hint:hover .scroll-hint__trace,
+.scroll-hint:focus-visible .scroll-hint__trace {
+  animation-duration: 1100ms;
+}
+
+/* Senza animazioni resta un segno statico, ma il bottone funziona lo stesso */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint {
+    transition: none;
+  }
+
+  .scroll-hint__trace {
+    animation: none;
+    translate: 0 0;
+    height: 100%;
+  }
+}

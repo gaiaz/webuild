@@ -109,14 +109,3 @@
   display: block;
 }
 
-.opening__hint {
-  position: absolute;
-  bottom: var(--space-8);
-  left: 50%;
-  translate: -50% 0;
-  white-space: nowrap;
-}
-
-[data-motion='reduced'] .opening__hint {
-  display: none;
-}

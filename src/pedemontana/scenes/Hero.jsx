@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { gsap, REDUCED_MOTION } from '../../lib/gsap'
 import { useSceneTimeline } from '../../lib/useSceneTimeline'
 import './Hero.css'
+import ScrollHint from '../../components/ScrollHint'
 
 /**
  * 01 — Hero. Il territorio visto dall'alto, di notte.
@@ -42,7 +43,7 @@ const Hero = () => {
           { yPercent: 110, duration: 1, stagger: 0.14 },
           0.4
         )
-        .from('.pede-hero__hint', { opacity: 0, duration: 0.6 }, 0.9)
+      // ScrollHint non entra in questa timeline: si anima da sé in CSS
     }, rootRef)
     return () => ctx.revert()
   }, [])
@@ -149,9 +150,7 @@ const Hero = () => {
         </p>
       </div>
 
-      <p className="pede-hero__hint annotation" aria-hidden="true">
-        Scorri — il tracciato si apre ↓
-      </p>
+      <ScrollHint label="Scorri — il tracciato si apre" />
     </section>
   )
 }

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { REDUCED_MOTION } from './lib/gsap'
 import TraceNav from './components/TraceNav'
+import ScrollHint from './components/ScrollHint'
 import Opening from './components/chapters/Opening'
 import Growth from './components/chapters/Growth'
 import GlobalMap from './components/chapters/GlobalMap'
@@ -57,6 +58,10 @@ const App = () => {
           <Finale />
         </div>
       </main>
+
+      {/* Richiamo discreto: compare solo se ci si ferma a metà percorso,
+          soprattutto sulle scene pinnate dove la pagina sembra ferma */}
+      <ScrollHint mode="idle" />
     </>
   )
 }
