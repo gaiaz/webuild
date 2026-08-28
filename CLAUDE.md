@@ -8,10 +8,17 @@ Prototipo editoriale non ufficiale (concept). Repo: https://github.com/gaiaz/web
 ```bash
 npm install      # dipendenze
 npm run dev      # dev server Vite su :5173
-npm run build    # build produzione
+npm run build    # build produzione (due entry: index.html + pedemontana.html)
+npm run preview  # serve dist/ su :4173 — com'è servito online
 ```
 
-C'è anche `.claude/launch.json` con la config `webuild-dev` per il Browser pane.
+`.claude/launch.json` ha due config per il Browser pane: `webuild-dev` (sviluppo)
+e `webuild-preview` (build di produzione, per verificare prima di deployare).
+
+**Node**: installato con Homebrew (v26). Se `node`/`npm` non si trovano, sono in
+`/opt/homebrew/bin`. Se il build fallisce con `Cannot find module
+@rollup/rollup-darwin-arm64`: `rm -rf node_modules package-lock.json && npm install`
+(bug npm sulle optional deps quando le dipendenze arrivano da un'altra macchina).
 
 ## Stack
 
@@ -166,7 +173,43 @@ endframe (ora la linea ripercorre le geometrie della storia e si distende).
 **Git**: repo `origin` = https://github.com/gaiaz/webuild.git, branch `main`.
 Gaia vuole commit + push dei progressi ("pusha e committa tutto qui").
 
+## Deploy (Vercel)
+
+URL produzione: https://webuild-snowy.vercel.app — `vercel.json` in repo fissa
+framework `vite`, build `npm run build`, output `dist`.
+
+**Stato al 28/08/2026 — da sistemare da Gaia nella dashboard Vercel:**
+il sito online serve ancora un build a *entry singola* (`assets/index-*.js`),
+mentre il repo produce due entry (`main-*.js` + `pedemontana-*.js`). Quindi:
+
+- `/` → HTTP 200 ma è la vecchia FY2025
+- `/pedemontana.html` → HTTP 404
+
+Dopo un push su `main` il deploy **non si rigenera** (verificato: 3 minuti,
+nessun cambio negli hash degli asset). L'integrazione Git del progetto Vercel
+non punta a `gaiaz/webuild` / branch `main`, oppure l'auto-deploy è disattivo.
+Da controllare in *Project → Settings → Git*. Il repo è a posto: il build di
+produzione servito staticamente in locale (`npm run preview`) carica
+`/pedemontana.html` senza errori.
+
+Per capire quale versione è online:
+```bash
+curl -s https://webuild-snowy.vercel.app/ | grep -o 'assets/[a-zA-Z0-9_-]*\.js'
+```
+Se compare `index-*.js` è il build vecchio; se compaiono `main-*.js` e
+`pedemontana-*.js` è aggiornato.
+
 ## Insidie note
+
+- **Una sezione pinnata non deve mai essere più alta della viewport**: la parte
+  che eccede è irraggiungibile (il pin la tiene ferma) e lo scroll sembra
+  bloccato. Successo sull'endframe Pedemontana: contenuto 1285px su viewport
+  1165. Soluzione applicata: i crediti fuori dal pin in un footer normale, e
+  misure limitate anche in vh (`min(var(--fs-3), 13vh)`, `height: min(22vh, 280px)`),
+  non solo dalla scala tipografica fluida che guarda solo la larghezza.
+- **`vite.config.js` è ESM** (`"type": "module"` in package.json): niente
+  `__dirname`, usare `fileURLToPath(new URL(file, import.meta.url))`. Con
+  `__dirname` funziona solo per lo shim che Vite inietta nel config — fragile.
 
 - Gli elementi pinnati sono `position: fixed` durante il pin: `getBoundingClientRect().top + scrollY` NON dà la posizione nel documento. Per misurare, usare i `.pin-spacer`.
 - `html { scroll-behavior: smooth }` è attivo: nei test via console fare prima `document.documentElement.style.scrollBehavior='auto'`.
