@@ -175,7 +175,7 @@ Gaia vuole commit + push dei progressi ("pusha e committa tutto qui").
 
 ## Deploy (Vercel)
 
-URL produzione: https://webuild-snowy.vercel.app — `vercel.json` in repo fissa
+URL produzione: https://webuild-drab.vercel.app — `vercel.json` in repo fissa
 framework `vite`, build `npm run build`, output `dist`.
 
 **Risolto il 28/08/2026 — entrambe le pagine sono online** (`/` e
@@ -196,7 +196,7 @@ in locale e salta del tutto la pipeline di Vercel:
 
 ```bash
 vercel build --prod                    # build nel formato .vercel/output
-vercel deploy --prebuilt --prod --yes  # upload; aliasa da solo webuild-snowy
+vercel deploy --prebuilt --prod --yes  # upload; aliasa da solo l'URL pubblico
 ```
 
 Attenzione: `vercel build` e `vercel deploy --prebuilt` devono avere lo **stesso
@@ -212,7 +212,7 @@ durata `?`, è la pipeline di Vercel bloccata → usare la via prebuilt qui sopr
 
 Per capire quale versione è online:
 ```bash
-curl -s https://webuild-snowy.vercel.app/ | grep -o 'assets/[a-zA-Z0-9_-]*\.js'
+curl -s https://webuild-drab.vercel.app/ | grep -o 'assets/[a-zA-Z0-9_-]*\.js'
 ```
 Se compare `index-*.js` è il build vecchio; se compaiono `main-*.js` e
 `pedemontana-*.js` è aggiornato.
