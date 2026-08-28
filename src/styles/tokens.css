@@ -5,38 +5,46 @@
 :root {
   /* Breakpoints di riferimento (mobile-first: 375 / 768 / 1280 / 1512 / 1920) */
 
-  /* ─── Primitive colors ─── */
-  --wb-red-600: #e1251b;
-  --wb-red-700: #b01610;
-  --wb-paper-100: #f7f5f0;
-  --wb-paper-200: #efece4;
-  --wb-ink-900: #16140f;
-  --wb-ink-700: #3a3830;
-  --wb-steel-500: #6d6a60;
-  --wb-line-300: #d9d4c8;
-  --wb-night-900: #0b1220;
-  --wb-night-700: #16223a;
-  --wb-night-ink: #aebad0;
-  --wb-forest-900: #0d1f18;
+  /* ─── Primitive colors — palette Webuild ufficiale ───
+     Rilevata dai colori computati di webuildgroup.com:
+     rosso #db002f, nero puro #000, testo #1f1f1f, grigi #5f5f5f/#a0a0a0. */
+  --wb-red-600: #db002f; /* rosso Webuild */
+  --wb-red-700: #a80024; /* variante profonda */
+  --wb-red-400: #ee2148; /* schiarito: testo piccolo su nero, AA 4,95:1 */
+  --wb-black: #000000; /* nero Webuild */
+  --wb-paper-100: #ffffff;
+  --wb-paper-200: #f2f2f2;
+  --wb-ink-900: #1f1f1f;
+  --wb-ink-700: #3d3d3d;
+  --wb-steel-500: #5f5f5f;
+  --wb-line-300: #dbdbdb;
+  --wb-night-900: #000000;
+  --wb-night-700: #141414;
+  --wb-night-500: #383838; /* texture puntinata su nero */
+  --wb-night-ink: #a0a0a0;
+  --wb-forest-900: #0a1410;
   --wb-forest-300: #9dbfae;
 
   /* ─── Semantic colors ─── */
   --color-accent: var(--wb-red-600);
   --color-accent-deep: var(--wb-red-700);
+  --color-accent-on-dark: var(--wb-red-400);
   --color-bg-base: var(--wb-paper-100);
   --color-bg-subtle: var(--wb-paper-200);
   --color-bg-night: var(--wb-night-900);
   --color-bg-forest: var(--wb-forest-900);
   --color-text-primary: var(--wb-ink-900);
   --color-text-secondary: var(--wb-steel-500);
-  --color-text-inverse: #f4f2ec;
+  --color-text-inverse: #ffffff;
   --color-text-night: var(--wb-night-ink);
   --color-border: var(--wb-line-300);
-  --color-border-night: #26334d;
+  --color-border-night: #2b2b2b;
 
-  /* ─── Typography ─── */
-  --font-display: 'Archivo', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* ─── Typography — font Webuild (Roboto / Roboto Mono) ───
+     Roboto è variabile: asse wdth 75–100, wght 100–900.
+     I font-stretch usati nel progetto (76–82%) rientrano nell'asse. */
+  --font-display: 'Roboto', system-ui, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
 
   /* Scala fluida ufficiale — interpolazione 375px → 1920px */
   --fs-1: clamp(100px, 14.24vw + 46.6px, 320px); /* Display XL */

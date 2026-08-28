@@ -88,7 +88,7 @@
 }
 
 .gmap__dot {
-  fill: #35425c;
+  fill: var(--wb-night-500);
 }
 
 .gmap__country {
