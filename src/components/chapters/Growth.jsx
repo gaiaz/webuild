@@ -75,7 +75,8 @@ const Growth = () => {
           '-=0.5'
         )
         // Fase B — la linea di crescita attraversa le cime
-        .set('.growth__deck-line', { strokeDasharray: 1400, strokeDashoffset: 1400 })
+        .set('.growth__deck-line', { strokeDasharray: 1400, strokeDashoffset: 1400 }, 0)
+        .set('.growth__arch', { strokeDasharray: 600, strokeDashoffset: 600 }, 0)
         .to('.growth__deck-line', { strokeDashoffset: 0, duration: 1 })
         // Fase C — le barre diventano pile, la linea diventa impalcato
         .to('.growth__bar', { scaleX: 0.34, opacity: 0.14, transformOrigin: '50% 100%', duration: 0.9 }, '+=0.3')
@@ -84,7 +85,6 @@ const Growth = () => {
         .to('.growth__deck-line', { strokeWidth: 16, duration: 0.8 }, '<')
         .fromTo('.growth__ground', { opacity: 0 }, { opacity: 1, duration: 0.8 }, '<')
         // Fase D — gli archi: l'EBITDA è la struttura che regge la crescita
-        .set('.growth__arch', { strokeDasharray: 600, strokeDashoffset: 600 })
         .to('.growth__arch', { strokeDashoffset: 0, duration: 1.1, stagger: 0.14 }, '+=0.2')
         .fromTo('.growth__ebitda', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.8')
         // Fase E — chiusura narrativa

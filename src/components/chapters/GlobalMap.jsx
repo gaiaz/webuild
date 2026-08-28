@@ -50,8 +50,8 @@ const GlobalMap = () => {
           '-=0.3'
         )
         // Le rotte si tracciano da Milano
+        .set('.gmap__route', { strokeDasharray: 3000, strokeDashoffset: 3000 }, 0)
         .fromTo('.gmap__milan', { scale: 0, transformOrigin: 'center' }, { scale: 1, duration: 0.3 })
-        .set('.gmap__route', { strokeDasharray: 3000, strokeDashoffset: 3000 })
         .to('.gmap__route', { strokeDashoffset: 0, duration: 1.4, stagger: 0.12 })
         .fromTo('.gmap__kicker', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
         .to({}, { duration: 0.6 })

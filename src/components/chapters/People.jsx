@@ -40,6 +40,7 @@ const People = () => {
     ({ tl }) => {
       const counter = { v: 0 }
       tl
+        .set('.people__figure', { strokeDasharray: 1, strokeDashoffset: 1 }, 0)
         .to(
           counter,
           {
@@ -68,7 +69,6 @@ const People = () => {
         // le nazionalità: anelli attorno a una parte del campo
         .fromTo('.people__stat--nat', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 }, '+=0.3')
         // alcuni punti diventano figure
-        .set('.people__figure', { strokeDasharray: 1, strokeDashoffset: 1 })
         .to('.people__figure', { strokeDashoffset: 0, duration: 1, stagger: 0.15 }, '+=0.2')
         .fromTo('.people__kicker', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, '+=0.3')
         .to({}, { duration: 0.5 })

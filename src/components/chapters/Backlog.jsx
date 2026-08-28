@@ -114,7 +114,7 @@ const Backlog = () => {
         )
         .fromTo('.backlog__stat--construction', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5 }, '-=0.6')
         // Strato 2 — il futuro in cantiere: nuovi ordini
-        .set('.backlog__wire, .backlog__crane', { strokeDasharray: 3200, strokeDashoffset: 3200 })
+        .set('.backlog__wire, .backlog__crane', { strokeDasharray: 3200, strokeDashoffset: 3200 }, 0)
         .to('.backlog__wire', { strokeDashoffset: 0, duration: 1.4, stagger: 0.15 }, '+=0.3')
         .to('.backlog__crane', { strokeDashoffset: 0, duration: 1.3, stagger: 0.2 }, '-=0.9')
         .fromTo('.backlog__stat--orders', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5 }, '-=1')
