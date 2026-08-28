@@ -178,19 +178,37 @@ Gaia vuole commit + push dei progressi ("pusha e committa tutto qui").
 URL produzione: https://webuild-snowy.vercel.app — `vercel.json` in repo fissa
 framework `vite`, build `npm run build`, output `dist`.
 
-**Stato al 28/08/2026 — da sistemare da Gaia nella dashboard Vercel:**
-il sito online serve ancora un build a *entry singola* (`assets/index-*.js`),
-mentre il repo produce due entry (`main-*.js` + `pedemontana-*.js`). Quindi:
+**Risolto il 28/08/2026 — entrambe le pagine sono online** (`/` e
+`/pedemontana.html`, HTTP 200, bundle `main-*.js` e `pedemontana-*.js`).
 
-- `/` → HTTP 200 ma è la vecchia FY2025
-- `/pedemontana.html` → HTTP 404
+**La causa vera** (la diagnosi precedente — "integrazione Git scollegata" — era
+sbagliata): la build pipeline *del solo progetto webuild* si è piantata. Ogni
+deploy creato dopo le 16:15 restava in stato `UNKNOWN` con durata `?`, cioè il
+build non partiva proprio. Verificato che non fosse colpa nostra:
 
-Dopo un push su `main` il deploy **non si rigenera** (verificato: 3 minuti,
-nessun cambio negli hash degli asset). L'integrazione Git del progetto Vercel
-non punta a `gaiaz/webuild` / branch `main`, oppure l'auto-deploy è disattivo.
-Da controllare in *Project → Settings → Git*. Il repo è a posto: il build di
-produzione servito staticamente in locale (`npm run preview`) carica
-`/pedemontana.html` senza errori.
+- `npm run build` in locale produce correttamente due entry
+- status page Vercel: nessun incidente
+- **altri progetti dello stesso account** (`noto`) buildavano in 20s nella stessa
+  finestra temporale → problema isolato a questo progetto, non all'account
+
+**La soluzione che ha funzionato — deploy prebuilt**, che carica il build fatto
+in locale e salta del tutto la pipeline di Vercel:
+
+```bash
+vercel build --prod                    # build nel formato .vercel/output
+vercel deploy --prebuilt --prod --yes  # upload; aliasa da solo webuild-snowy
+```
+
+Attenzione: `vercel build` e `vercel deploy --prebuilt` devono avere lo **stesso
+target**. Senza `--prod` sul primo, il secondo fallisce con
+"prebuilt output was built with target environment preview".
+
+Se serve rilinkare la cartella: `vercel link --yes --project webuild` (crea
+`.vercel/`, già in `.gitignore`), poi `vercel pull --yes` per le impostazioni.
+
+Se in futuro il push su `main` non aggiorna il sito, prima di dare la colpa al
+repo controllare `vercel ls webuild`: se gli ultimi deploy sono `UNKNOWN` con
+durata `?`, è la pipeline di Vercel bloccata → usare la via prebuilt qui sopra.
 
 Per capire quale versione è online:
 ```bash
