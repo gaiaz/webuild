@@ -1,0 +1,71 @@
+.beneficio {
+  padding-block: var(--space-32);
+}
+
+.beneficio__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.beneficio__title {
+  font-size: var(--fs-7);
+  max-width: 30ch;
+}
+
+.beneficio__plate svg {
+  width: 100%;
+  height: auto;
+}
+
+.beneficio__tree line {
+  stroke: var(--color-text-secondary);
+  stroke-width: 2;
+}
+
+.beneficio__tree circle {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 1.5;
+}
+
+.beneficio__street {
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+}
+
+.beneficio__street-dash {
+  stroke: var(--color-text-secondary);
+  stroke-width: 1;
+  stroke-dasharray: 10 12;
+}
+
+.beneficio__tunnel {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.beneficio__lane {
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 16 14;
+  opacity: 0.6;
+}
+
+.beneficio__lbl {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+.beneficio__lbl--under {
+  fill: var(--color-accent);
+}
+
+.beneficio__body {
+  font-size: var(--fs-10);
+  max-width: 46ch;
+}

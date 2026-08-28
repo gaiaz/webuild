@@ -1,0 +1,76 @@
+.terre {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.terre__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.terre__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.terre__figure {
+  font-size: var(--fs-4);
+}
+
+.terre__unit {
+  font-size: 0.4em;
+  font-weight: 700;
+}
+
+.terre__caption {
+  font-size: var(--fs-8);
+  max-width: 28ch;
+}
+
+.terre__viz svg {
+  width: 100%;
+  height: auto;
+}
+
+.terre__source {
+  fill: var(--color-text-primary);
+}
+
+.terre__flow {
+  fill: none;
+  stroke-linecap: butt;
+}
+
+.terre__flow--riuso {
+  stroke: var(--color-accent);
+  opacity: 0.85;
+}
+
+.terre__flow--cave {
+  stroke: var(--color-border);
+}
+
+.terre__dest-num {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 800;
+  fill: var(--color-text-primary);
+}
+
+.terre__lbl {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+.terre__kicker em {
+  color: var(--color-accent);
+}

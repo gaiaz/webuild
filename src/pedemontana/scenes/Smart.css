@@ -1,0 +1,120 @@
+.smart__intro {
+  padding-block: var(--space-32) var(--space-24);
+}
+
+.smart__title {
+  font-size: var(--fs-6);
+  margin-block: var(--space-4);
+}
+
+.smart__sub {
+  color: var(--color-text-night);
+  max-width: 44ch;
+  font-size: var(--fs-10);
+}
+
+.smart__stack {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pannelli sticky che si impilano. Il contenuto è centrato verticalmente:
+   testo e tavola convivono in due colonne invece di ammassarsi in basso. */
+.smart__panel {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-top: 1px solid var(--color-border-night);
+}
+
+.smart__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: var(--space-8);
+  padding-block: var(--space-24) var(--space-16);
+}
+
+@media (min-width: 1024px) {
+  .smart__layout {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    padding-block: var(--space-16);
+  }
+}
+
+.smart__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.smart__name {
+  font-size: var(--fs-8);
+  max-width: 22ch;
+}
+
+.smart__fact {
+  max-width: 46ch;
+  font-size: var(--fs-11);
+}
+
+.smart__note {
+  max-width: 46ch;
+}
+
+/* Su mobile la tavola sta sotto il testo (regola hero del sistema responsive) */
+.smart__plate {
+  order: 2;
+}
+
+@media (min-width: 1024px) {
+  .smart__plate {
+    order: 0;
+  }
+}
+
+.smart__plate svg {
+  width: 100%;
+  height: auto;
+  opacity: 0.95;
+}
+
+.smart-plate__stroke {
+  stroke: var(--color-text-night);
+  stroke-width: 2.5;
+  fill: none;
+}
+
+.smart-plate__stroke--accent {
+  stroke: var(--color-accent);
+  stroke-width: 3.5;
+}
+
+.smart-plate__hair {
+  stroke: var(--color-border-night);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.smart-plate__wave {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  fill: none;
+  opacity: 0.7;
+}
+
+.smart-plate__sensor {
+  fill: var(--color-accent);
+}
+
+.smart-plate__lbl {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: var(--color-text-night);
+}

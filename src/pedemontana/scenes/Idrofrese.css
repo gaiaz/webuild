@@ -1,0 +1,114 @@
+.idrofrese {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.idrofrese__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.idrofrese__title {
+  font-size: var(--fs-7);
+  max-width: 34ch;
+}
+
+.idrofrese__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .idrofrese__layout {
+    grid-template-columns: 2fr minmax(200px, 1fr);
+  }
+}
+
+.idrofrese__viz svg {
+  width: 100%;
+  height: auto;
+}
+
+.idrofrese__surface {
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+}
+
+.idrofrese__rig line {
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+}
+
+.idrofrese__rig rect {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+}
+
+.idrofrese__ceppo path {
+  stroke: var(--color-border);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.idrofrese__ceppo-lbl {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+.idrofrese__cut {
+  fill: var(--color-bg-subtle);
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+.idrofrese__cutter line {
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+}
+
+.idrofrese__cutter rect {
+  fill: var(--color-accent);
+}
+
+.idrofrese__cutter circle {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+.idrofrese__tick line {
+  stroke: var(--color-text-secondary);
+  stroke-width: 1.5;
+}
+
+.idrofrese__tick text {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  fill: var(--color-text-secondary);
+}
+
+.idrofrese__depth-num {
+  font-size: var(--fs-4);
+  color: var(--color-accent);
+}
+
+.idrofrese__depth-unit {
+  font-size: 0.45em;
+  font-weight: 700;
+}
+
+.idrofrese__body {
+  font-size: var(--fs-10);
+  max-width: 46ch;
+}

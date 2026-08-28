@@ -1,0 +1,127 @@
+.pede-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ─── Il territorio dall'alto: curve di livello in filigrana ─── */
+.pede-hero__terrain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.pede-hero__contour {
+  stroke: var(--color-border-night);
+  stroke-width: 1;
+  fill: none;
+}
+
+.pede-hero__inner {
+  position: relative;
+  z-index: var(--z-above);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  padding-block: var(--space-24) var(--space-16);
+}
+
+/* Il marchio apre la composizione insieme al titolo. Sparisce in opacità
+   mantenendo il proprio spazio: il titolo sotto non si sposta mai. */
+.pede-hero__mark {
+  width: clamp(196px, 22vw, 348px);
+  height: auto;
+  margin-bottom: var(--space-6);
+}
+
+.pede-hero__meta {
+  margin-bottom: var(--space-8);
+}
+
+/* ─── Titolo in tre tempi: testo · linea · testo ─── */
+.pede-hero__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.pede-hero__lead,
+.pede-hero__payoff {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pede-hero__lead,
+.pede-hero__payoff {
+  font-size: var(--fs-6);
+  color: var(--color-text-inverse);
+}
+
+.pede-hero__mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+.pede-hero__word {
+  display: block;
+}
+
+/* Fascia dedicata alla linea: garantisce che il tracciato non attraversi mai
+   il testo — i due blocchi tipografici restano separati dalla sua altezza. */
+.pede-hero__band {
+  display: block;
+  width: min(100%, 1120px);
+  aspect-ratio: 1200 / 120;
+  max-height: 132px;
+  margin-block: var(--space-2);
+}
+
+.pede-hero__band svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pede-hero__trace {
+  stroke: var(--color-accent);
+  stroke-width: 6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pede-hero__node {
+  fill: var(--color-bg-night);
+  stroke: var(--color-accent);
+  stroke-width: 4;
+}
+
+.pede-hero__opera {
+  margin-top: var(--space-6);
+}
+
+.pede-hero__hint {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  translate: -50% 0;
+  white-space: nowrap;
+  z-index: var(--z-above);
+}
+
+[data-motion='reduced'] .pede-hero__hint {
+  display: none;
+}
+
+[data-motion='reduced'] .pede-hero__node {
+  opacity: 1;
+}

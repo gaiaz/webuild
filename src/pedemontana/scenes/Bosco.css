@@ -1,0 +1,71 @@
+.bosco {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.bosco__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.bosco__title {
+  font-size: var(--fs-7);
+  max-width: 26ch;
+}
+
+.bosco__figure {
+  font-size: var(--fs-5);
+  color: var(--wb-forest-300);
+  margin-top: var(--space-4);
+}
+
+.bosco__unit {
+  font-size: 0.4em;
+  font-weight: 700;
+}
+
+.bosco__viz {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bosco__viz svg {
+  width: min(100%, 660px);
+  height: auto;
+}
+
+.bosco__cell--cut {
+  fill: none;
+  stroke: var(--color-text-night);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 5;
+}
+
+.bosco__cell--green {
+  fill: var(--wb-forest-300);
+}
+
+.bosco__lbl {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.bosco__lbl--cut {
+  fill: var(--color-text-night);
+}
+
+.bosco__lbl--green {
+  fill: var(--wb-forest-300);
+}
+
+.bosco__kicker em {
+  color: var(--wb-forest-300);
+}

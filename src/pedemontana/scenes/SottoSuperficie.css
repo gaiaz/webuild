@@ -1,0 +1,77 @@
+.sottosup {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sottosup__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.sottosup__title {
+  font-size: var(--fs-6);
+}
+
+.sottosup__viz svg {
+  width: 100%;
+  height: auto;
+}
+
+.sottosup__hatch {
+  stroke: var(--color-border-night);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.sottosup__surface {
+  stroke: var(--color-text-inverse);
+  stroke-width: 2.5;
+  fill: none;
+}
+
+.sottosup__route {
+  stroke: var(--color-accent);
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.sottosup__zone {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: var(--color-text-night);
+}
+
+.sottosup__zone--surface {
+  fill: var(--color-text-inverse);
+}
+
+.sottosup__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6) var(--space-16);
+}
+
+.sottosup__stat {
+  max-width: 34ch;
+}
+
+.sottosup__stat-num {
+  font-size: var(--fs-5);
+}
+
+.sottosup__stat-lbl {
+  margin-top: var(--space-2);
+  color: var(--color-text-night);
+}
+
+.sottosup__kicker em {
+  color: var(--color-accent);
+}

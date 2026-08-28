@@ -1,0 +1,120 @@
+.sistema {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sistema__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.sistema__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sistema__title {
+  font-size: var(--fs-6);
+  max-width: 18ch;
+}
+
+.sistema__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6) var(--space-12);
+}
+
+.sistema__stat-num {
+  font-size: var(--fs-7);
+}
+
+.sistema__map svg {
+  width: 100%;
+  height: auto;
+}
+
+/* ─── Asse ─── */
+.sistema__baseline {
+  stroke: var(--color-border);
+  stroke-width: 2;
+}
+
+.sistema__tratta {
+  stroke: var(--color-accent);
+  stroke-width: 6;
+  stroke-linecap: butt;
+}
+
+/* Le tratte adiacenti si toccano: un piccolo stacco le rende leggibili
+   come cinque segmenti distinti invece che come un'unica linea. */
+.sistema__node {
+  stroke: var(--color-bg-base);
+  stroke-width: 5;
+}
+
+.sistema__letter {
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  fill: var(--color-accent);
+}
+
+.sistema__leader {
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.sistema__place {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--color-text-primary);
+}
+
+.sistema__compass {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+/* ─── Tangenziali ─── */
+.sistema__branch {
+  stroke: var(--color-text-secondary);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 7 6;
+}
+
+.sistema__branch-lbl {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+.sistema__province {
+  margin-top: var(--space-4);
+  text-align: center;
+}
+
+.sistema__kicker em {
+  color: var(--color-accent);
+}
+
+[data-motion='reduced'] .sistema__map :is(
+  .sistema__node, .sistema__leader, .sistema__place,
+  .sistema__letter, .sistema__branch, .sistema__branch-lbl
+) {
+  opacity: 1;
+}

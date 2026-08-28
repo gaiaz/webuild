@@ -1,0 +1,121 @@
+.chiusura {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.chiusura__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-6);
+  padding-block: var(--space-16);
+}
+
+/* ─── La linea che ripercorre la storia ─── */
+.chiusura__stage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.chiusura__stage svg {
+  width: 100%;
+  height: auto;
+}
+
+.chiusura__line {
+  stroke: var(--color-accent);
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Le geometrie già attraversate restano in filigrana */
+.chiusura__echo {
+  stroke: var(--color-border);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* Il colpo di coda: la linea si estende oltre i margini */
+.chiusura__sweep {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  opacity: 0;
+}
+
+/* Slot unico per le didascalie: si alternano senza spostare il layout */
+.chiusura__captions {
+  position: relative;
+  height: 1.6em;
+  width: 100%;
+}
+
+.chiusura__caption {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+[data-motion='reduced'] .chiusura__caption {
+  position: static;
+  opacity: 1;
+}
+
+[data-motion='reduced'] .chiusura__captions {
+  height: auto;
+}
+
+/* ─── Il claim ─── */
+.chiusura__claims {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.chiusura__claim {
+  display: block;
+  font-size: var(--fs-8);
+  line-height: var(--lh-heading);
+}
+
+.chiusura__claim--two {
+  color: var(--color-accent);
+}
+
+.chiusura__way {
+  font-size: var(--fs-3);
+  color: var(--color-accent);
+  letter-spacing: -0.01em;
+  margin-top: var(--space-4);
+}
+
+.chiusura__brand {
+  width: clamp(148px, 16vw, 248px);
+  height: auto;
+  margin-top: var(--space-6);
+}
+
+.chiusura__credits {
+  max-width: 64ch;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-size: var(--fs-13);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-12);
+}
+
+[data-motion='reduced'] .chiusura__inner :is(
+  .chiusura__echo, .chiusura__claim, .chiusura__way, .chiusura__brand
+) {
+  opacity: 1;
+}

@@ -1,0 +1,96 @@
+.funzione {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.funzione__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-block: var(--space-16);
+}
+
+.funzione__title {
+  font-size: var(--fs-7);
+  line-height: var(--lh-heading);
+  max-width: 30ch;
+}
+
+.funzione__viz svg {
+  width: 100%;
+  height: auto;
+}
+
+.funzione__origin {
+  fill: var(--color-text-primary);
+}
+
+/* Oggi: i flussi che scendono tutti sullo stesso punto */
+.funzione__link {
+  stroke: var(--color-text-secondary);
+  stroke-width: 1.6;
+  fill: none;
+}
+
+.funzione__hub-ring {
+  fill: var(--color-bg-base);
+  stroke: var(--color-text-primary);
+  stroke-width: 2;
+}
+
+.funzione__hub-dot {
+  fill: var(--color-text-primary);
+}
+
+/* La saturazione del nodo */
+.funzione__ring {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 7;
+}
+
+/* Domani: l'asse e gli innesti */
+.funzione__axis {
+  stroke: var(--color-accent);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.funzione__drop {
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+}
+
+.funzione__joint {
+  fill: var(--color-bg-base);
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.funzione__lbl {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+.funzione__lbl--domani {
+  fill: var(--color-accent);
+}
+
+.funzione__body {
+  font-size: var(--fs-10);
+  max-width: 46ch;
+}
+
+[data-motion='reduced'] .funzione__viz :is(
+  .funzione__origin, .funzione__hub, .funzione__lbl,
+  .funzione__link, .funzione__axis, .funzione__drop, .funzione__joint
+) {
+  opacity: 1;
+}

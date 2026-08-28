@@ -97,10 +97,58 @@ App.jsx raggruppa le scene nei **5 capitoli macro** con id: `growth`, `future`,
 - Disegno progressivo tratti: preferire `pathLength="1"` sull'elemento SVG +
   dasharray/dashoffset 0..1 (evita di calcolare lunghezze reali).
 
+## Seconda pagina — Pedemontana Lombarda (`/pedemontana.html`)
+
+Scroll narration "Sotto la superficie" sulle tratte B2 e C, claim **MY NEW WAY**.
+Entry Vite separata (vedi `vite.config.js`), stessi token e stessi pattern GSAP.
+
+```
+pedemontana.html            # entry
+src/data/pedemontana.js     # numeri, capitoli, schema dell'asse
+src/components/SiteHeader.* # logo fisso in alto a destra (condiviso, non duplicare)
+src/pedemontana/
+  main.jsx · PedemontanaApp.jsx
+  scenes/                   # 16 scene, in ordine di scroll:
+    Hero (pin) · Sistema (pin) · Funzione (pin) · TratteBC (pin)
+    SottoSuperficie (pin, night) · Beneficio · MetodoMilano (pin)
+    Idrofrese (pin) · Ferrovie (pin) · Terre (pin) · Bonifica
+    Bosco (pin, forest) · Smart (sticky-stack, night) · Persone (pin)
+    Impatto · Chiusura (pin)
+```
+
+Capitoli macro: `territorio`, `sotto-la-superficie`, `ingegneria`, `ambiente`, `smart-futuro`.
+
+**Logo**: `public/webuild-logo.svg` (Wikimedia Commons, pubblico dominio).
+Grande in cima all'apertura, poi fisso piccolo in alto a destra, di nuovo grande
+nell'endframe. `SiteHeader` si ritira sulle sezioni con `data-hide-header`
+(hero e chiusura) misurando il **pin-spacer** dal vivo, non con start/end
+di ScrollTrigger — su sezioni pinnate quella geometria è sbagliata.
+
+## Insidie GSAP scoperte su questa pagina
+
+- **`strokeDashoffset` non si interpola fra 1 e 0**: con `pathLength="1"` GSAP
+  salta al valore finale e il tratto *compare* invece di disegnarsi. Usare
+  `prepStroke(tl, sel, root)` in `lib/drawStroke.js`, che passa la lunghezza
+  reale del path. Il margine extra copre il `stroke-linecap: round`, che
+  altrimenti lascia un punto visibile a tratto nascosto.
+- **Un elemento non può stare in due timeline**: se la timeline d'ingresso fa
+  `.from(el, {opacity: 0})` e quella scrubbed anima lo stesso `el`, lo scrub
+  registra 0 come valore di partenza e l'elemento resta invisibile. Assegnare
+  ogni elemento a una sola delle due (o usare `fromTo` con valori espliciti).
+- **`vector-effect: non-scaling-stroke` + `preserveAspectRatio="none"`**:
+  combinazione da evitare sui tratti animati con dash.
+- `.annotation--accent` veniva schiacciato da `.theme-night .annotation`
+  (specificità 0,2,0 vs 0,1,0): risolto in `base.css` con regole scoped.
+
 ## Stato lavoro (aggiornato al 28/08/2026)
 
-**Fatto e verificato visivamente** (desktop): tutte le 12 scene, nav, jump tra
-capitoli, tema chiaro/scuro della nav sulle sezioni night/forest.
+**FY2025** — fatto e verificato visivamente (desktop): tutte le 12 scene, nav,
+jump tra capitoli, tema chiaro/scuro della nav sulle sezioni night/forest.
+
+**Pedemontana** — tutte le 16 scene verificate a schermo. Rifatte su feedback di
+Gaia: schema dell'asse (le etichette si accavallavano), scena Funzione (i
+raccordi non toccavano l'asse), pannelli Smart (testo schiacciato in basso),
+endframe (ora la linea ripercorre le geometrie della storia e si distende).
 
 **Decisioni utente da rispettare:**
 1. **TESTI**: Gaia deve sostituire i copy. Stanno in `src/data/fy2025.js` (numeri,

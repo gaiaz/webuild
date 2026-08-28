@@ -8,9 +8,9 @@ import './TraceNav.css'
  * Su desktop è una linea verticale a sinistra che "si costruisce" con lo scroll;
  * su mobile diventa una linea orizzontale in alto.
  */
-const TraceNav = () => {
+const TraceNav = ({ chapters = CHAPTERS }) => {
   const fillRef = useRef(null)
-  const [active, setActive] = useState('growth')
+  const [active, setActive] = useState(chapters[0].id)
   const [dark, setDark] = useState(false)
 
   useEffect(() => {
@@ -25,8 +25,8 @@ const TraceNav = () => {
             fillRef.current.style.setProperty('--progress', self.progress)
           }
           const mid = window.innerHeight / 2
-          let current = CHAPTERS[0].id
-          CHAPTERS.forEach((ch) => {
+          let current = chapters[0].id
+          chapters.forEach((ch) => {
             const el = document.getElementById(ch.id)
             if (el && el.getBoundingClientRect().top <= mid) current = ch.id
           })
@@ -64,7 +64,7 @@ const TraceNav = () => {
         <div className="trace-nav__fill" ref={fillRef} />
       </div>
       <ul className="trace-nav__list">
-        {CHAPTERS.map((ch) => (
+        {chapters.map((ch) => (
           <li key={ch.id} className="trace-nav__item">
             <button
               type="button"

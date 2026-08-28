@@ -7,7 +7,7 @@ import { gsap, REDUCED_MOTION } from './gsap'
  * il CSS ([data-motion="reduced"]) mostra gli stati finali in flusso.
  *
  * @param {React.RefObject} scopeRef - elemento radice della scena
- * @param {(ctx: { tl: gsap.core.Timeline }) => void} build - costruisce la timeline
+ * @param {(ctx: { tl: gsap.core.Timeline, root: Element }) => void} build - costruisce la timeline
  * @param {object} triggerVars - override per scrollTrigger (end, pin, ...)
  */
 export function useSceneTimeline(scopeRef, build, triggerVars = {}) {
@@ -26,7 +26,7 @@ export function useSceneTimeline(scopeRef, build, triggerVars = {}) {
           ...triggerVars,
         },
       })
-      build({ tl })
+      build({ tl, root: scopeRef.current })
     }, scopeRef)
     return () => ctx.revert()
     // eslint-disable-next-line react-hooks/exhaustive-deps

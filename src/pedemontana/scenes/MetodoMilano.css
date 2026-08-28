@@ -1,0 +1,110 @@
+.metodo {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.metodo__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.metodo__title {
+  font-size: var(--fs-7);
+  max-width: 28ch;
+}
+
+.metodo__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .metodo__layout {
+    grid-template-columns: minmax(200px, 1fr) 2fr;
+  }
+}
+
+.metodo__steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.metodo__step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+[data-motion='reduced'] .metodo__step {
+  opacity: 1 !important;
+}
+
+.metodo__step-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-9);
+  font-weight: 700;
+  font-stretch: 82%;
+  text-transform: uppercase;
+  line-height: var(--lh-heading);
+}
+
+.metodo__viz svg {
+  width: 100%;
+  height: auto;
+}
+
+.metodo__hatch {
+  stroke: var(--color-border);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.metodo__wall {
+  fill: var(--color-text-primary);
+}
+
+.metodo__slab {
+  fill: var(--color-text-primary);
+}
+
+.metodo__surface-line {
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+  fill: none;
+}
+
+.metodo__surface-deco line {
+  stroke: var(--color-text-secondary);
+  stroke-width: 2;
+}
+
+.metodo__surface-deco circle {
+  fill: none;
+  stroke: var(--color-text-secondary);
+  stroke-width: 1.5;
+}
+
+.metodo__dig {
+  fill: var(--color-bg-subtle);
+}
+
+.metodo__road {
+  stroke: var(--color-accent);
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.metodo__body {
+  font-size: var(--fs-10);
+  max-width: 46ch;
+}

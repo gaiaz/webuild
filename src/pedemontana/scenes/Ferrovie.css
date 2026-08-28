@@ -1,0 +1,71 @@
+.ferrovie {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.ferrovie__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.ferrovie__title {
+  font-size: var(--fs-7);
+  max-width: 30ch;
+}
+
+.ferrovie__viz svg {
+  width: 100%;
+  height: auto;
+}
+
+.ferrovie__sleeper {
+  stroke: var(--color-border);
+  stroke-width: 2;
+}
+
+.ferrovie__rail {
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+}
+
+.ferrovie__train rect {
+  fill: var(--color-text-primary);
+}
+
+.ferrovie__box {
+  fill: var(--color-bg-subtle);
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.ferrovie__push {
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  fill: none;
+}
+
+.ferrovie__box-lbl {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  fill: var(--color-accent);
+}
+
+.annotation-svg {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+.ferrovie__body {
+  font-size: var(--fs-10);
+  max-width: 46ch;
+}

@@ -142,6 +142,13 @@ button {
   color: var(--color-text-night);
 }
 
+/* Il modificatore --accent vince sul tema: senza questa regola
+   `.theme-night .annotation` (0,2,0) batte `.annotation--accent` (0,1,0)
+   e le etichette rosse diventano grigie sulle sezioni scure. */
+.theme-night .annotation--accent {
+  color: var(--color-accent);
+}
+
 .theme-forest {
   background: var(--color-bg-forest);
   color: var(--color-text-inverse);
@@ -149,6 +156,10 @@ button {
 
 .theme-forest .annotation {
   color: var(--wb-forest-300);
+}
+
+.theme-forest .annotation--accent {
+  color: var(--color-accent);
 }
 
 /* ─── Scene impilate (fasi assolute dentro un pin) ───

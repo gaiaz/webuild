@@ -1,0 +1,49 @@
+/* ─── Header persistente col logo ───
+   Sotto 1280px la TraceNav occupa i primi 44px in alto: l'header si posiziona
+   sotto di essa. Da 1280px la nav diventa verticale a sinistra e il top è libero. */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 56px;
+  padding-inline: var(--margin-mobile);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+/* Sull'endframe il marchio ha il suo spazio: l'header si ritira */
+.site-header--hidden {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+.site-header--hidden .site-header__home {
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .site-header {
+    padding-inline: var(--margin-tablet);
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-header {
+    padding-top: var(--space-8);
+    padding-inline: var(--margin-desktop);
+  }
+}
+
+.site-header__home {
+  pointer-events: auto;
+  display: block;
+  line-height: 0;
+}
+
+.site-header__logo {
+  width: clamp(104px, 8vw, 148px);
+  height: auto;
+}

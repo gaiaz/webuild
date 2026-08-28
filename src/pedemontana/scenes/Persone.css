@@ -1,0 +1,65 @@
+.persone {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.persone__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.persone__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.persone__caption {
+  font-size: var(--fs-8);
+  max-width: 30ch;
+}
+
+.persone__figure-num {
+  font-size: var(--fs-4);
+  color: var(--color-accent);
+}
+
+.persone__sub {
+  color: var(--color-text-secondary);
+}
+
+.persone__field svg {
+  width: 100%;
+  height: auto;
+}
+
+.persone__dot {
+  fill: var(--color-text-primary);
+}
+
+.persone__trace {
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  fill: none;
+  opacity: 0.7;
+}
+
+.persone__figure {
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.persone__scale {
+  margin-top: var(--space-2);
+}
+
+.persone__kicker em {
+  color: var(--color-accent);
+}

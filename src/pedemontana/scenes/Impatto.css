@@ -1,0 +1,46 @@
+.impatto {
+  padding-block: var(--space-32);
+}
+
+.impatto__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.impatto__title {
+  font-size: var(--fs-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.impatto__claim {
+  display: block;
+}
+
+.impatto__claim:nth-child(3) {
+  color: var(--color-accent);
+}
+
+.impatto__net {
+  width: min(100%, 900px);
+  height: auto;
+}
+
+.impatto__net-line {
+  stroke: var(--color-accent);
+  stroke-width: 3;
+  fill: none;
+}
+
+.impatto__net-node {
+  fill: var(--color-bg-base);
+  stroke: var(--color-text-primary);
+  stroke-width: 2;
+}
+
+.impatto__body {
+  font-size: var(--fs-10);
+  max-width: 46ch;
+}

@@ -1,0 +1,90 @@
+.trattebc {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.trattebc__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-block: var(--space-16);
+}
+
+.trattebc__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.trattebc__figure {
+  font-size: var(--fs-4);
+}
+
+.trattebc__unit {
+  font-size: 0.4em;
+  font-weight: 700;
+}
+
+.trattebc__caption {
+  font-size: var(--fs-8);
+  max-width: 26ch;
+}
+
+.trattebc__viz svg {
+  width: 100%;
+  height: auto;
+}
+
+.trattebc__ghost {
+  stroke: var(--color-border);
+  stroke-width: 2;
+  fill: none;
+}
+
+.trattebc__seg {
+  stroke: var(--color-accent);
+  stroke-width: 7;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.trattebc__end-ring {
+  fill: var(--color-bg-base);
+  stroke: var(--color-text-primary);
+  stroke-width: 2;
+}
+
+.trattebc__end-lbl {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--color-text-primary);
+}
+
+.trattebc__bracket {
+  stroke: var(--color-text-secondary);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.trattebc__quota {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+.trattebc__consorzio {
+  margin-top: var(--space-2);
+  text-align: center;
+}
+
+.trattebc__body {
+  font-size: var(--fs-10);
+  max-width: 46ch;
+}
