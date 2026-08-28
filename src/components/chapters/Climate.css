@@ -1,0 +1,58 @@
+.climate {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.climate__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-block: var(--space-16);
+  gap: var(--space-8);
+  text-align: center;
+}
+
+.climate__head .climate__title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: var(--space-3);
+  color: var(--wb-forest-300);
+}
+
+.climate__letter svg {
+  width: min(52vw, 420px);
+  height: auto;
+}
+
+.climate__stroke {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.climate__horizon {
+  stroke: var(--wb-forest-300);
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.climate__rating {
+  margin-top: var(--space-6);
+  font-size: var(--fs-12);
+}
+
+.climate__rating strong {
+  color: var(--color-text-inverse);
+  font-size: 1.4em;
+}
+
+.climate__kicker {
+  color: var(--color-text-inverse);
+}

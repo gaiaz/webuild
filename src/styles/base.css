@@ -1,0 +1,163 @@
+/* ────────────────────────────────────────────────
+   Base / reset / primitivi condivisi
+   ──────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-display);
+  font-size: var(--fs-11);
+  line-height: var(--lh-normal);
+  color: var(--color-text-primary);
+  background: var(--color-bg-base);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Container (margini 16 / 40 / 80, max 1440 centrato) ─── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--margin-mobile);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: var(--margin-tablet);
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding-inline: var(--margin-desktop);
+  }
+}
+
+/* ─── Primitivi tipografici ricorrenti ─── */
+
+/* Annotazione tecnica in mono — l'etichetta "da disegno esecutivo" */
+.annotation {
+  font-family: var(--font-mono);
+  font-size: var(--fs-13);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.annotation--accent {
+  color: var(--color-accent);
+}
+
+/* Riga narrativa che chiude ogni capitolo */
+.kicker {
+  font-family: var(--font-display);
+  font-size: var(--fs-9);
+  font-weight: 500;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.01em;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.kicker em {
+  font-style: normal;
+  color: var(--color-accent);
+}
+
+/* Numero monumentale */
+.big-number {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 76%;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Titolo display */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 82%;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Sezioni scure */
+.theme-night {
+  background: var(--color-bg-night);
+  color: var(--color-text-inverse);
+}
+
+.theme-night .annotation {
+  color: var(--color-text-night);
+}
+
+.theme-forest {
+  background: var(--color-bg-forest);
+  color: var(--color-text-inverse);
+}
+
+.theme-forest .annotation {
+  color: var(--wb-forest-300);
+}
+
+/* ─── Scene impilate (fasi assolute dentro un pin) ───
+   Con prefers-reduced-motion le fasi tornano in flusso
+   e la pagina resta leggibile senza alcuna animazione. */
+[data-motion='reduced'] .scene-phase {
+  position: static !important;
+  opacity: 1 !important;
+  transform: none !important;
+  inset: auto !important;
+  padding-block: var(--space-12);
+}

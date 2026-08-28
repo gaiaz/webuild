@@ -1,0 +1,125 @@
+.backlog {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-bg-subtle);
+  overflow: hidden;
+}
+
+.backlog__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-block: var(--space-12) var(--space-8);
+}
+
+.backlog__title {
+  font-size: var(--fs-6);
+  margin-top: var(--space-2);
+  max-width: 14ch;
+}
+
+/* ─── Le tre cifre: fascia in flusso, mai in overlay ─── */
+.backlog__stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.backlog__num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 78%;
+  font-size: var(--fs-8);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.backlog__stat .annotation {
+  margin-top: var(--space-1);
+}
+
+.backlog__stat--orders .backlog__num {
+  color: var(--wb-ink-700);
+}
+
+.backlog__stat--total {
+  text-align: right;
+}
+
+.backlog__stat--total .backlog__num {
+  color: var(--color-accent);
+  font-size: var(--fs-7);
+}
+
+/* ─── La skyline ─── */
+.backlog__city {
+  margin-top: auto;
+}
+
+.backlog__city svg {
+  width: 100%;
+  height: min(52vh, 620px);
+  overflow: visible;
+}
+
+.backlog__bg {
+  fill: var(--wb-line-300);
+}
+
+.backlog__solid {
+  fill: var(--wb-ink-900);
+}
+
+.backlog__mast {
+  stroke: var(--wb-ink-900);
+  stroke-width: 3;
+}
+
+.backlog__wire {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.backlog__crane {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.backlog__ground {
+  stroke: var(--wb-ink-900);
+  stroke-width: 3;
+}
+
+.backlog__measure line {
+  stroke: var(--color-text-secondary);
+  stroke-width: 1.5;
+}
+
+.backlog__kicker {
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 767px) {
+  .backlog__city svg {
+    height: 32vh;
+  }
+
+  .backlog__stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .backlog__stat--total {
+    text-align: left;
+  }
+}

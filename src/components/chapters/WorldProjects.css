@@ -1,0 +1,93 @@
+.wproj__intro {
+  padding-block: var(--space-32) var(--space-24);
+}
+
+.wproj__title {
+  font-size: var(--fs-5);
+  max-width: 12ch;
+  margin-top: var(--space-3);
+}
+
+.wproj__sub {
+  margin-top: var(--space-6);
+  color: var(--color-text-night);
+  max-width: 44ch;
+}
+
+/* ─── Pila di pannelli sticky ─── */
+.wproj__stack {
+  position: relative;
+}
+
+.wproj__panel {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  border-top: 1px solid var(--color-border-night);
+}
+
+/* Alternanza di atmosfera tra i pannelli */
+.wproj__panel:nth-child(2n) {
+  background: var(--wb-night-700);
+}
+
+.wproj__plate {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.55;
+}
+
+.wproj__plate svg {
+  width: min(78vw, 900px);
+  height: auto;
+}
+
+.plate__stroke {
+  fill: none;
+  stroke: var(--color-text-night);
+  stroke-width: 2.5;
+}
+
+.plate__stroke--accent {
+  stroke: var(--color-accent);
+  stroke-width: 3.5;
+}
+
+.plate__hair {
+  stroke: var(--color-border-night);
+  stroke-width: 1;
+}
+
+.wproj__content {
+  position: relative;
+  z-index: var(--z-above);
+  padding-block: var(--space-16);
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--wb-night-900) 88%, transparent),
+    transparent
+  );
+}
+
+.wproj__name {
+  font-size: var(--fs-5);
+  margin-top: var(--space-3);
+  max-width: 14ch;
+}
+
+.wproj__place {
+  margin-top: var(--space-3);
+}
+
+.wproj__fact {
+  margin-top: var(--space-4);
+  font-size: var(--fs-10);
+  max-width: 42ch;
+  color: var(--color-text-night);
+}

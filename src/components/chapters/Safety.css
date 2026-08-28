@@ -1,0 +1,74 @@
+.safety {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-bg-subtle);
+  overflow: hidden;
+}
+
+.safety__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-block: var(--space-16) var(--space-8);
+  gap: var(--space-6);
+}
+
+.safety__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-weight: 400;
+  margin-top: var(--space-2);
+}
+
+.safety__hours {
+  font-size: var(--fs-4);
+}
+
+.safety__caption {
+  font-size: var(--fs-11);
+  color: var(--color-text-secondary);
+}
+
+.safety__marks {
+  flex: 1;
+  min-height: 0;
+}
+
+.safety__marks svg {
+  width: 100%;
+  height: min(42vh, 460px);
+}
+
+.safety__mark {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+/* Ogni quinto cluster in rosso: il ritmo del gesto */
+.safety__mark:nth-child(10n) {
+  stroke: var(--color-accent);
+}
+
+.safety__marks .annotation {
+  margin-top: var(--space-2);
+}
+
+.safety__meetings {
+  font-size: var(--fs-10);
+  max-width: 46ch;
+  color: var(--color-text-secondary);
+}
+
+.safety__meetings strong {
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 767px) {
+  .safety__marks svg {
+    height: 26vh;
+  }
+}

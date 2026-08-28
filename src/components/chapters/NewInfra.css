@@ -1,0 +1,84 @@
+.ninfra {
+  background: var(--color-bg-subtle);
+  padding-block: var(--space-32);
+}
+
+.ninfra__title {
+  font-size: var(--fs-6);
+  margin-top: var(--space-3);
+  max-width: 16ch;
+}
+
+.ninfra__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4) var(--space-6);
+  margin-top: var(--space-16);
+}
+
+@media (min-width: 768px) {
+  .ninfra__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.ninfra__type {
+  border-top: 1px solid var(--color-text-primary);
+  padding-block: var(--space-8);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'glyph num'
+    'glyph label'
+    'glyph note';
+  column-gap: var(--space-8);
+  align-content: start;
+}
+
+.ninfra__glyph {
+  grid-area: glyph;
+  width: clamp(150px, 22vw, 300px);
+}
+
+.ninfra__draw {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ninfra__draw--accent {
+  stroke: var(--color-accent);
+  stroke-width: 3.5;
+}
+
+.ninfra__type .annotation {
+  grid-area: num;
+  align-self: start;
+}
+
+.ninfra__label {
+  grid-area: label;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 80%;
+  font-size: var(--fs-7);
+  line-height: var(--lh-heading);
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  margin-top: var(--space-2);
+}
+
+.ninfra__note {
+  grid-area: note;
+  font-size: var(--fs-12);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-2);
+}
+
+.ninfra__kicker {
+  margin-top: var(--space-24);
+}

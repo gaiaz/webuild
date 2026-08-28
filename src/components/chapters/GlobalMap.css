@@ -1,0 +1,137 @@
+.gmap {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.gmap__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding-block: var(--space-16);
+}
+
+.gmap__lead {
+  position: absolute;
+  top: 12vh;
+  left: var(--margin-mobile);
+  z-index: var(--z-above);
+}
+
+@media (min-width: 768px) {
+  .gmap__lead {
+    left: var(--margin-tablet);
+  }
+}
+
+@media (min-width: 1280px) {
+  .gmap__lead {
+    left: var(--margin-desktop);
+  }
+}
+
+[data-motion='reduced'] .gmap__lead {
+  position: static;
+}
+
+.gmap__title {
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gmap__figure {
+  font-size: var(--fs-2);
+  color: var(--color-text-inverse);
+}
+
+.gmap__pct {
+  font-size: 0.45em;
+}
+
+.gmap__caption {
+  font-size: var(--fs-11);
+  color: var(--color-text-night);
+  max-width: 30ch;
+}
+
+.gmap__caption strong {
+  color: var(--color-text-inverse);
+}
+
+/* ─── Mappa ─── */
+.gmap__map {
+  width: 100vw;
+  margin-inline: calc(-1 * var(--margin-mobile));
+  margin-top: auto;
+}
+
+@media (min-width: 768px) {
+  .gmap__map {
+    margin-inline: calc(-1 * var(--margin-tablet));
+  }
+}
+
+@media (min-width: 1280px) {
+  .gmap__map {
+    margin-inline: 0;
+    width: 100%;
+  }
+}
+
+.gmap__map svg {
+  width: 100%;
+  height: min(66vh, 660px);
+}
+
+.gmap__dot {
+  fill: #35425c;
+}
+
+.gmap__country {
+  fill: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  stroke: var(--color-accent);
+  stroke-width: 0.8;
+}
+
+.gmap__route {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.6;
+  opacity: 0.85;
+}
+
+.gmap__milan {
+  fill: var(--color-text-inverse);
+  stroke: var(--color-accent);
+  stroke-width: 3;
+}
+
+.gmap__kicker {
+  position: absolute;
+  bottom: 8vh;
+  right: var(--margin-mobile);
+  text-align: right;
+  color: var(--color-text-inverse);
+}
+
+@media (min-width: 768px) {
+  .gmap__kicker {
+    right: var(--margin-tablet);
+  }
+}
+
+@media (min-width: 1280px) {
+  .gmap__kicker {
+    right: var(--margin-desktop);
+  }
+}
+
+[data-motion='reduced'] .gmap__kicker {
+  position: static;
+  text-align: left;
+  margin-top: var(--space-8);
+}

@@ -1,0 +1,156 @@
+.growth {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  background: var(--color-bg-base);
+  overflow: hidden;
+}
+
+.growth__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100vh;
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-8);
+}
+
+.growth__head {
+  position: relative;
+  z-index: var(--z-above);
+}
+
+.growth__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-weight: 400;
+}
+
+.growth__figure {
+  font-size: var(--fs-2);
+  color: var(--color-text-primary);
+}
+
+.growth__unit {
+  font-size: 0.32em;
+  font-weight: 700;
+  font-stretch: 100%;
+  letter-spacing: 0;
+  vertical-align: baseline;
+}
+
+.growth__caption {
+  font-size: var(--fs-11);
+  color: var(--color-text-secondary);
+  max-width: 40ch;
+}
+
+.growth__caption strong {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* ─── Il grafico/viadotto ─── */
+.growth__chart {
+  position: relative;
+  margin-top: var(--space-6);
+}
+
+.growth__chart svg {
+  width: 100%;
+  height: min(58vh, 620px);
+  overflow: visible;
+}
+
+.growth__bar {
+  fill: var(--color-accent);
+}
+
+.growth__value {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  fill: var(--color-text-primary);
+}
+
+.growth__yearlbl {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  letter-spacing: 0.1em;
+  fill: var(--color-text-secondary);
+}
+
+.growth__pier {
+  fill: var(--color-text-primary);
+  opacity: 0;
+}
+
+[data-motion='reduced'] .growth__pier {
+  opacity: 1;
+}
+
+.growth__arch {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 5;
+}
+
+.growth__deck-line {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 6;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.growth__ground {
+  stroke: var(--color-text-primary);
+  stroke-width: 3;
+}
+
+/* EBITDA — annotazione strutturale */
+.growth__ebitda {
+  position: absolute;
+  right: 0;
+  top: -4%;
+  max-width: 300px;
+  text-align: right;
+}
+
+[data-motion='reduced'] .growth__ebitda {
+  position: static;
+  text-align: left;
+  margin-top: var(--space-8);
+}
+
+.growth__ebitda-figure {
+  font-size: var(--fs-6);
+}
+
+.growth__ebitda-caption {
+  font-size: var(--fs-12);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-2);
+}
+
+.growth__ebitda-caption strong {
+  color: var(--color-accent);
+}
+
+.growth__kicker {
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 767px) {
+  .growth__ebitda {
+    position: static;
+    text-align: left;
+    margin-top: var(--space-4);
+    max-width: none;
+  }
+
+  .growth__chart svg {
+    height: 38vh;
+  }
+}

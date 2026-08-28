@@ -1,0 +1,115 @@
+.people {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-bg-base);
+  overflow: hidden;
+}
+
+.people__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-block: var(--space-16) var(--space-8);
+}
+
+.people__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-weight: 400;
+  margin-top: var(--space-2);
+}
+
+.people__figure-num {
+  font-size: var(--fs-3);
+}
+
+.people__caption {
+  font-size: var(--fs-11);
+  color: var(--color-text-secondary);
+}
+
+.people__field {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-top: var(--space-4);
+}
+
+.people__field svg {
+  width: 100%;
+  height: min(52vh, 640px);
+}
+
+.people__dot {
+  fill: var(--color-text-primary);
+}
+
+.people__dot--hire {
+  /* il tint arriva via timeline; qui il colore di partenza */
+  fill: var(--color-text-primary);
+}
+
+[data-motion='reduced'] .people__dot--hire {
+  fill: var(--color-accent);
+}
+
+.people__figure {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.people__scale {
+  margin-top: var(--space-2);
+}
+
+.people__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-6);
+}
+
+.people__stats {
+  display: flex;
+  gap: var(--space-12);
+  text-align: right;
+  padding-bottom: var(--space-3);
+}
+
+.people__stat-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 80%;
+  font-size: var(--fs-7);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.people__stat--hires .people__stat-num {
+  color: var(--color-accent);
+}
+
+.people__stat .annotation {
+  margin-top: var(--space-1);
+}
+
+.people__kicker {
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 767px) {
+  .people__field svg {
+    height: 34vh;
+  }
+
+  .people__stats {
+    gap: var(--space-8);
+    text-align: left;
+    padding-bottom: 0;
+  }
+}

@@ -1,0 +1,152 @@
+/* ─── TraceNav — mobile: linea orizzontale in alto ─── */
+.trace-nav {
+  position: fixed;
+  z-index: var(--z-nav);
+  inset: 0 0 auto 0;
+  height: 44px;
+  pointer-events: none;
+}
+
+.trace-nav__track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: color-mix(in srgb, var(--color-border) 55%, transparent);
+}
+
+.trace-nav__fill {
+  --progress: 0;
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform-origin: left center;
+  transform: scaleX(var(--progress));
+}
+
+.trace-nav__list {
+  list-style: none;
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--margin-mobile) 0;
+}
+
+.trace-nav__item {
+  display: flex;
+}
+
+.trace-nav__node {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 32px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.trace-nav__tick {
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  flex: none;
+}
+
+.trace-nav__label {
+  display: none;
+}
+
+.trace-nav__num {
+  font-weight: 500;
+}
+
+.trace-nav__node--active {
+  color: var(--color-accent);
+}
+
+.trace-nav__node--active .trace-nav__tick {
+  background: currentColor;
+}
+
+.trace-nav__node--active .trace-nav__label {
+  display: inline;
+}
+
+/* Su mobile mostro solo il label del capitolo attivo */
+@media (max-width: 767px) {
+  .trace-nav__node:not(.trace-nav__node--active) .trace-nav__label {
+    display: none;
+  }
+}
+
+/* ─── Desktop: linea verticale a sinistra ─── */
+@media (min-width: 1280px) {
+  .trace-nav {
+    inset: 0 auto 0 0;
+    width: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 28px;
+  }
+
+  .trace-nav__track {
+    top: 10vh;
+    bottom: 10vh;
+    left: 28px;
+    right: auto;
+    height: auto;
+    width: 2px;
+  }
+
+  .trace-nav__fill {
+    transform-origin: center top;
+    transform: scaleY(var(--progress));
+  }
+
+  .trace-nav__list {
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80vh;
+    padding: 0;
+    margin-left: -3px;
+  }
+
+  .trace-nav__label {
+    display: inline;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+  }
+
+  .trace-nav__node:hover .trace-nav__label,
+  .trace-nav__node:focus-visible .trace-nav__label,
+  .trace-nav__node--active .trace-nav__label {
+    opacity: 1;
+    transform: none;
+  }
+
+  .trace-nav__node {
+    font-size: 11px;
+  }
+}
+
+/* ─── Tema scuro (sezioni night/forest) ─── */
+.trace-nav--dark .trace-nav__node {
+  color: var(--color-text-night);
+}
+
+.trace-nav--dark .trace-nav__node--active {
+  color: var(--color-accent);
+}
+
+.trace-nav--dark .trace-nav__track {
+  background: color-mix(in srgb, #ffffff 18%, transparent);
+}

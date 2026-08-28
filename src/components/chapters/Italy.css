@@ -1,0 +1,149 @@
+.italy {
+  background: var(--color-bg-base);
+  padding-block: var(--space-32);
+}
+
+.italy__title {
+  font-size: var(--fs-6);
+  margin-top: var(--space-3);
+}
+
+.italy__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  margin-top: var(--space-16);
+}
+
+@media (min-width: 1280px) {
+  .italy__layout {
+    grid-template-columns: 6fr 5fr;
+    gap: var(--space-16);
+  }
+}
+
+/* ─── Step di progetto ─── */
+.italy__step {
+  min-height: 46vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+  padding-block: var(--space-12);
+  border-top: 1px solid var(--color-border);
+  opacity: 0.34;
+  transition: opacity 400ms ease;
+}
+
+@media (min-width: 1280px) {
+  .italy__step {
+    min-height: 72vh;
+  }
+}
+
+.italy__step--active,
+[data-motion='reduced'] .italy__step {
+  opacity: 1;
+}
+
+.italy__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 82%;
+  font-size: var(--fs-7);
+  line-height: var(--lh-heading);
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  max-width: 16ch;
+}
+
+.italy__fact {
+  font-size: var(--fs-11);
+  color: var(--color-text-secondary);
+  max-width: 40ch;
+}
+
+/* ─── Mappa sticky ─── */
+.italy__map-wrap {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .italy__map-wrap {
+    display: block;
+  }
+
+  .italy__map {
+    position: sticky;
+    top: 8vh;
+    height: 84vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.italy__map svg {
+  height: min(74vh, 640px);
+  width: auto;
+}
+
+.italy__shape {
+  fill: var(--color-bg-subtle);
+  stroke: var(--color-text-primary);
+  stroke-width: 1.5;
+}
+
+.italy__route {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dashoffset 700ms ease;
+}
+
+.italy__node-ring {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 1.5;
+  opacity: 0.25;
+  transition: opacity 400ms ease, stroke 400ms ease;
+}
+
+.italy__node-dot {
+  fill: var(--color-text-primary);
+  opacity: 0.25;
+  transition: opacity 400ms ease, fill 400ms ease;
+}
+
+.italy__node--on .italy__node-ring {
+  opacity: 1;
+  stroke: var(--color-accent);
+}
+
+.italy__node--on .italy__node-dot {
+  opacity: 1;
+  fill: var(--color-accent);
+}
+
+.italy__map-caption {
+  margin-top: var(--space-4);
+}
+
+/* Su mobile la mappa compare come figura in coda agli step */
+@media (max-width: 1279px) {
+  .italy__map-wrap {
+    display: block;
+  }
+
+  .italy__map svg {
+    height: 58vh;
+    margin-inline: auto;
+  }
+
+  .italy__map-caption {
+    text-align: center;
+  }
+}
