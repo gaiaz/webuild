@@ -146,6 +146,7 @@ const Chiusura = () => {
   )
 
   return (
+    <>
     <section
       ref={rootRef}
       className="chiusura"
@@ -193,23 +194,29 @@ const Chiusura = () => {
           width="119"
           height="33"
         />
-
-        <footer className="chiusura__credits">
-          <h3 className="sr-only">Fonti, note e crediti</h3>
-          <p>
-            Nota sui dati: il dato dell'85% si riferisce esclusivamente alle
-            tratte B2 e C. Il sistema viabilistico complessivo misura 157 km,
-            mentre gli 87 km indicano l'estensione dell'asse autostradale
-            articolato nelle cinque tratte e nelle tangenziali di Varese e Como.
-          </p>
-          <p>
-            Fonte: factsheet testi Pedelombarda, versione italiana del 28 luglio
-            2026. Prototipo editoriale non ufficiale, realizzato a scopo di
-            concept. Tipografia: Archivo, IBM Plex Mono (Google Fonts).
-          </p>
-        </footer>
       </div>
     </section>
+
+    {/* Fuori dal pin: qui lo scroll è normale e la pagina può finire */}
+    <footer className="chiusura-credits" data-hide-header>
+      <div className="container">
+        <div className="chiusura-credits__inner">
+        <h3 className="sr-only">Fonti, note e crediti</h3>
+        <p>
+          Nota sui dati: il dato dell'85% si riferisce esclusivamente alle
+          tratte B2 e C. Il sistema viabilistico complessivo misura 157 km,
+          mentre gli 87 km indicano l'estensione dell'asse autostradale
+          articolato nelle cinque tratte e nelle tangenziali di Varese e Como.
+        </p>
+        <p>
+          Fonte: factsheet testi Pedelombarda, versione italiana del 28 luglio
+          2026. Prototipo editoriale non ufficiale, realizzato a scopo di
+          concept. Tipografia: Archivo, IBM Plex Mono (Google Fonts).
+        </p>
+        </div>
+      </div>
+    </footer>
+    </>
   )
 }
 
