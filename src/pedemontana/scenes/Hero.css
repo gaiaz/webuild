@@ -21,49 +21,177 @@
   fill: none;
 }
 
+/* ─── Foto aerea a piena pagina: sfuma rivelando il fondo nero ─── */
+.pede-hero__photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+[data-motion='reduced'] .pede-hero__photo {
+  opacity: 0;
+}
+
+/* Ancorato dall'alto (non centrato come blocco): nel Figma "Per il futuro
+   della" comincia al 27,87% dell'altezza del frame, indipendentemente da
+   quanto ingombrano gli elementi che seguono (linea, payoff) e che a inizio
+   scena sono ancora invisibili — centrare l'intero blocco li conterebbe
+   comunque, spingendo il testo visibile troppo in alto. */
 .pede-hero__inner {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: var(--z-above);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--space-4);
-  padding-block: var(--space-24) var(--space-16);
+  gap: min(var(--space-4), 1.5vh);
+  padding-top: 27.87vh;
+  padding-bottom: min(var(--space-16), 4vh);
 }
 
-/* Il marchio apre la composizione insieme al titolo. Sparisce in opacità
-   mantenendo il proprio spazio: il titolo sotto non si sposta mai. */
+/* Centrato in modo indipendente al centro esatto della viewport (come nel
+   Figma), non dentro allo stack del titolo: così la sua posizione a riposo
+   non dipende dall'ingombro degli altri elementi (invisibili in apertura). */
+.pede-hero__brand-anchor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: var(--z-above);
+}
+
+.pede-hero__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Il marchio apre la composizione insieme alla foto, rivelato da una
+   maschera (clip-path) che si apre da sinistra; poi si ritira piccolo
+   in alto senza mai spostare il resto del titolo. Sulla foto è bianco
+   (leggibile sul duotono rosso), poi passa al rosso di marchio non
+   appena il fondo diventa nero: due livelli sovrapposti in dissolvenza. */
+.pede-hero__mark-wrap {
+  position: relative;
+  display: inline-block;
+  width: min(clamp(196px, 20.32vw, 348px), 30vh);
+  margin-bottom: min(var(--space-6), 2vh);
+}
+
 .pede-hero__mark {
-  width: clamp(196px, 22vw, 348px);
+  display: block;
+  width: 100%;
   height: auto;
-  margin-bottom: var(--space-6);
 }
 
-.pede-hero__meta {
-  margin-bottom: var(--space-8);
+.pede-hero__mark--white {
+  filter: brightness(0) invert(1);
 }
 
-/* ─── Titolo in tre tempi: testo · linea · testo ─── */
+.pede-hero__mark--red {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+[data-motion='reduced'] .pede-hero__mark--white {
+  opacity: 0;
+}
+
+[data-motion='reduced'] .pede-hero__mark--red {
+  opacity: 1;
+}
+
+p.pede-hero__meta {
+  margin: 0;
+  color: var(--color-text-inverse);
+}
+
+[data-motion='reduced'] p.pede-hero__meta {
+  color: var(--color-text-night);
+}
+
+/* ─── Titolo: sottotitolo · LOMBARDIA · linea · payoff ─── */
 .pede-hero__title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
+  gap: min(var(--space-2), 1vh);
   width: 100%;
+  margin-top: min(var(--space-8), 3vh);
 }
 
-.pede-hero__lead,
-.pede-hero__payoff {
+.pede-hero__headline {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: min(var(--space-2), 1vh);
+  transform-origin: 50% 0%;
 }
 
-.pede-hero__lead,
-.pede-hero__payoff {
-  font-size: var(--fs-6);
+/* Dimensioni e tracking calcolati esattamente sul frame Figma di riferimento
+   (1713×958 — nodo "step 02"): rapporto font-size/larghezza-frame riportato
+   in vw, cos che le proporzioni restino identiche a qualunque larghezza. */
+.pede-hero__sub {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-stretch: 75%; /* "Roboto Condensed Regular" del Figma = asse wdth al minimo */
+  font-size: min(clamp(28px, 6.203vw, 120px), 9vh); /* 106.26px / 1713px */
+  line-height: 1.12;
   color: var(--color-text-inverse);
+  text-transform: uppercase;
+  letter-spacing: -0.024em; /* -2.5851px / 106.26px */
+}
+
+/* LOMBARDIA: due livelli sovrapposti — la foto (sotto) e il bianco pieno
+   (sopra) — che si dissolvono l'uno nell'altro. Nessuna reflow: il layer
+   fotografico è assoluto sopra la stessa scatola definita dal testo bianco.
+   Full-bleed (esce dal container): nel Figma occupa il 90,8% del frame. */
+.pede-hero__word-stack {
+  position: relative;
+  display: inline-block;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  font-size: min(clamp(72px, 18.205vw, 350px), 22vh); /* 311.87px / 1713px */
+}
+
+.pede-hero__word-photo,
+.pede-hero__word-solid {
+  display: block;
+  width: 100%;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 82%;
+  line-height: 1.12; /* 349.015px / 311.87px */
+  letter-spacing: -0.024em; /* -7.5873px / 311.87px */
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.pede-hero__word-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-motion='reduced'] .pede-hero__word-photo {
+  opacity: 0;
+}
+
+.pede-hero__word-solid {
+  color: var(--color-text-inverse);
+}
+
+[data-motion='reduced'] .pede-hero__word-solid {
+  opacity: 1;
 }
 
 .pede-hero__mask {
@@ -82,8 +210,8 @@
   display: block;
   width: min(100%, 1120px);
   aspect-ratio: 1200 / 120;
-  max-height: 132px;
-  margin-block: var(--space-2);
+  max-height: min(132px, 12vh);
+  margin-block: min(var(--space-2), 1vh);
 }
 
 .pede-hero__band svg {
@@ -91,24 +219,53 @@
   height: 100%;
 }
 
-.pede-hero__trace {
-  stroke: var(--color-accent);
-  stroke-width: 6;
+/* Segnaletica autostradale: base grigia spessa + tratteggio bianco sopra,
+   come nel Figma — non una sottile linea piena. */
+.pede-hero__road-base {
+  stroke: var(--color-text-secondary);
+  stroke-width: 16;
   fill: none;
   stroke-linecap: round;
-  stroke-linejoin: round;
+}
+
+.pede-hero__road-dash {
+  stroke: var(--color-text-inverse);
+  stroke-width: 5;
+  stroke-dasharray: 18 14;
+  fill: none;
+  stroke-linecap: round;
 }
 
 .pede-hero__node {
-  fill: var(--color-bg-night);
+  fill: var(--color-text-inverse);
   stroke: var(--color-accent);
   stroke-width: 4;
 }
 
+.pede-hero__payoff {
+  font-size: min(var(--fs-6), 7vh);
+  color: var(--color-text-inverse);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pede-hero__accent {
+  font-style: normal;
+  color: var(--color-accent); /* testo grande: 4,05:1 supera la soglia AA (3:1) per large text */
+}
+
 .pede-hero__opera {
-  margin-top: var(--space-6);
+  margin-top: min(var(--space-6), 2vh);
 }
 
 [data-motion='reduced'] .pede-hero__node {
   opacity: 1;
+}
+
+/* Senza timeline la larghezza del clip-rect resta quella di default (1200,
+   già impostata nel markup): la strada è già interamente visibile. */
+
+[data-motion='reduced'] .pede-hero__mark-wrap {
+  clip-path: none;
 }

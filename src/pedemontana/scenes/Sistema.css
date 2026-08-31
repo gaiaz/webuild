@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background: var(--color-bg-subtle);
 }
 
 .sistema__inner {
@@ -16,12 +17,12 @@
 .sistema__head {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-12);
 }
 
 .sistema__title {
   font-size: var(--fs-6);
-  max-width: 18ch;
+  max-width: 30ch;
 }
 
 .sistema__stats {
@@ -32,6 +33,7 @@
 
 .sistema__stat-num {
   font-size: var(--fs-7);
+  color: var(--color-accent);
 }
 
 .sistema__map svg {
@@ -39,23 +41,15 @@
   height: auto;
 }
 
-/* ─── Asse ─── */
-.sistema__baseline {
-  stroke: var(--color-border);
-  stroke-width: 2;
+/* ─── Asse: segnaletica autostradale ─── */
+.sistema__tratta rect {
+  fill: var(--color-accent);
 }
 
-.sistema__tratta {
-  stroke: var(--color-accent);
-  stroke-width: 6;
-  stroke-linecap: butt;
-}
-
-/* Le tratte adiacenti si toccano: un piccolo stacco le rende leggibili
-   come cinque segmenti distinti invece che come un'unica linea. */
-.sistema__node {
+.sistema__lane {
   stroke: var(--color-bg-base);
-  stroke-width: 5;
+  stroke-width: 3;
+  stroke-dasharray: 14 10;
 }
 
 .sistema__letter {
@@ -72,35 +66,52 @@
 }
 
 .sistema__place {
-  font-family: var(--font-mono);
-  font-size: 19px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: 100%;
+  font-size: 20px;
   fill: var(--color-text-primary);
 }
 
 .sistema__compass {
-  font-family: var(--font-mono);
-  font-size: 17px;
-  letter-spacing: 0.18em;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 100%;
+  font-size: 22px;
   text-transform: uppercase;
-  fill: var(--color-text-secondary);
+  fill: var(--color-text-primary);
 }
 
-/* ─── Tangenziali ─── */
+.sistema__compass-icon circle {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 1.5;
+}
+
+.sistema__compass-icon path {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ─── Tangenziali: rami a pillola ─── */
 .sistema__branch {
   stroke: var(--color-text-secondary);
-  stroke-width: 2;
+  stroke-width: 1.5;
   fill: none;
-  stroke-dasharray: 7 6;
+  stroke-dasharray: 5 4;
+}
+
+.sistema__branch-pill {
+  fill: var(--color-border);
 }
 
 .sistema__branch-lbl {
-  font-family: var(--font-mono);
-  font-size: 17px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  fill: var(--color-text-secondary);
+  font-family: var(--font-display);
+  font-size: 15px;
+  fill: var(--color-text-primary);
 }
 
 .sistema__province {
@@ -108,13 +119,21 @@
   text-align: center;
 }
 
+p.sistema__kicker {
+  align-self: center;
+  max-width: none;
+  white-space: nowrap;
+  text-align: center;
+  text-wrap: nowrap;
+}
+
 .sistema__kicker em {
   color: var(--color-accent);
 }
 
 [data-motion='reduced'] .sistema__map :is(
-  .sistema__node, .sistema__leader, .sistema__place,
-  .sistema__letter, .sistema__branch, .sistema__branch-lbl
+  .sistema__leader, .sistema__place,
+  .sistema__letter, .sistema__branch, .sistema__branch-pill, .sistema__branch-lbl
 ) {
   opacity: 1;
 }
