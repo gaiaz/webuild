@@ -16,6 +16,11 @@ const STEPS = [
   { n: '04', label: 'Scavo', note: 'la strada nasce sotto' },
 ]
 
+// Legge il valore risolto di un token colore, per non ripetere gli
+// esadecimali della palette nelle animazioni GSAP (che non sanno
+// interpolare una stringa var(...) di partenza, ma un colore risolto sì).
+const cssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+
 const MetodoMilano = () => {
   const rootRef = useRef(null)
 
@@ -40,7 +45,12 @@ const MetodoMilano = () => {
       tl
         // 3 — ripristino superficie
         .to('.metodo__surface-line', { strokeDashoffset: 0, duration: 0.9 }, '+=0.3')
-        .fromTo('.metodo__surface-deco', { opacity: 0 }, { opacity: 1, duration: 0.6 }, '-=0.4')
+        .fromTo(
+          '.metodo__surface-deco, .metodo__skyline',
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6 },
+          '-=0.4'
+        )
       on(2)
       tl
         // 4 — scavo interno
@@ -50,8 +60,44 @@ const MetodoMilano = () => {
       tl
         .fromTo('.metodo__body', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, '+=0.3')
         .to({}, { duration: 0.5 })
+      // 5 — giorno e notte: il cantiere va avanti 24 ore su 24
+      tl
+        .to(root, { backgroundColor: cssVar('--color-bg-night'), duration: 1 }, '+=0.3')
+        .to('.metodo__inner', { color: cssVar('--color-text-inverse'), duration: 1 }, '<')
+        .to(
+          '.metodo .annotation:not(.annotation--accent)',
+          { color: cssVar('--color-text-night'), duration: 1 },
+          '<'
+        )
+        .to('.metodo .annotation--accent', { color: cssVar('--color-accent-on-dark'), duration: 1 }, '<')
+        .to(
+          '.metodo__wall-body, .metodo__wall-cap, .metodo__slab-body',
+          { fill: cssVar('--color-text-inverse'), duration: 1 },
+          '<'
+        )
+        .to(
+          '.metodo__wall-joint, .metodo__slab-hatch',
+          { stroke: cssVar('--color-bg-night'), duration: 1 },
+          '<'
+        )
+        .to('.metodo__earth-bg', { fill: cssVar('--color-bg-night-subtle'), duration: 1 }, '<')
+        .to('.metodo__earth-line', { stroke: cssVar('--color-line-night'), duration: 1 }, '<')
+        .to('.metodo__mountains', { fill: cssVar('--color-line-night'), duration: 1 }, '<')
+        .to('.metodo__surface-line', { stroke: cssVar('--color-text-inverse'), duration: 1 }, '<')
+        .to(
+          '.metodo__surface-deco line, .metodo__surface-deco circle:not(.metodo__lamp-head):not(.metodo__lamp-ring)',
+          { stroke: cssVar('--color-text-night'), duration: 1 },
+          '<'
+        )
+        .to('.metodo__dig-body', { fill: cssVar('--color-bg-night-subtle'), duration: 1 }, '<')
+        .to('.metodo__strut', { stroke: cssVar('--color-text-night'), duration: 1 }, '<')
+        .to('.metodo__lamp-head', { fill: cssVar('--color-text-inverse'), duration: 0.6 }, '<0.4')
+        .to('.metodo__lamp-ring--1', { opacity: 0.85, duration: 0.6 }, '<')
+        .to('.metodo__lamp-ring--2', { opacity: 0.45, duration: 0.6 }, '<')
+        .to('.metodo__lamp-ring--3', { opacity: 0.2, duration: 0.6 }, '<')
+        .to({}, { duration: 0.5 })
     },
-    { end: '+=480%' }
+    { end: '+=600%' }
   )
 
   return (
@@ -128,7 +174,24 @@ const MetodoMilano = () => {
                 ))}
               </g>
 
-              {/* 3 — superficie ripristinata: alberi, lampione, un'auto */}
+              {/* 3 — superficie ripristinata: la Pedemontana è ai piedi
+                  delle Alpi — profilo montano e un paio di villette in
+                  filigrana, dietro alla città che torna in quota */}
+              <g className="metodo__skyline">
+                <path
+                  className="metodo__mountains"
+                  d="M 20 160 L 90 85 L 150 130 L 230 55 L 310 125 L 390 70 L 470 128 L 550 58 L 630 120 L 700 90 L 740 160 Z"
+                />
+                <g className="metodo__chalet" transform="translate(140,160)">
+                  <rect className="metodo__chalet-body" x="-14" y="-26" width="28" height="26" />
+                  <path className="metodo__chalet-roof" d="M -18 -26 L 0 -44 L 18 -26 Z" />
+                </g>
+                <g className="metodo__chalet" transform="translate(650,160)">
+                  <rect className="metodo__chalet-body" x="-14" y="-26" width="28" height="26" />
+                  <path className="metodo__chalet-roof" d="M -18 -26 L 0 -44 L 18 -26 Z" />
+                </g>
+              </g>
+              {/* alberi, lampione, un'auto */}
               <path className="metodo__surface-line" d="M 40 160 H 720" />
               <g className="metodo__surface-deco">
                 <line x1="300" y1="160" x2="300" y2="134" />
@@ -141,6 +204,9 @@ const MetodoMilano = () => {
                 <circle cx="470" cy="109" r="13" />
                 <line x1="392" y1="160" x2="392" y2="112" />
                 <line x1="392" y1="112" x2="406" y2="112" />
+                <circle className="metodo__lamp-ring metodo__lamp-ring--3" cx="406" cy="112" r="15" />
+                <circle className="metodo__lamp-ring metodo__lamp-ring--2" cx="406" cy="112" r="10" />
+                <circle className="metodo__lamp-ring metodo__lamp-ring--1" cx="406" cy="112" r="6" />
                 <circle className="metodo__lamp-head" cx="406" cy="112" r="4" />
                 <g className="metodo__deco-car" transform="translate(600,148)">
                   <rect x="-16" y="0" width="32" height="11" rx="3" />

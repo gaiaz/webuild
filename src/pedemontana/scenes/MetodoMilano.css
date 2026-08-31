@@ -100,6 +100,22 @@
   opacity: 0.3;
 }
 
+/* Il profilo montano, in filigrana dietro alla città: la Pedemontana
+   è ai piedi delle Alpi. */
+.metodo__mountains {
+  fill: var(--color-border);
+}
+
+.metodo__chalet-body {
+  fill: var(--color-bg-base);
+  stroke: var(--color-text-secondary);
+  stroke-width: 1.5;
+}
+
+.metodo__chalet-roof {
+  fill: var(--color-accent);
+}
+
 .metodo__surface-line {
   stroke: var(--color-text-primary);
   stroke-width: 2.5;
@@ -122,12 +138,21 @@ circle.metodo__lamp-head {
   stroke: none;
 }
 
+/* Il lampione si accende nella fase notte: cerchi concentrici piatti
+   (nessun blur), via via più trasparenti verso l'esterno, spenti di
+   giorno (opacity 0). */
+circle.metodo__lamp-ring {
+  fill: var(--color-text-inverse);
+  stroke: none;
+  opacity: 0;
+}
+
 .metodo__deco-car rect {
-  fill: var(--color-text-secondary);
+  fill: var(--color-accent);
 }
 
 .metodo__deco-car circle {
-  fill: var(--color-text-secondary);
+  fill: var(--color-accent-deep);
   stroke: none;
 }
 
