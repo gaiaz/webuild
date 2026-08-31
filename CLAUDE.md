@@ -1,7 +1,7 @@
 # Webuild FY2025 — I risultati prendono forma
 
 Data story interattiva longform sui risultati consolidati Webuild FY2025.
-Prototipo editoriale non ufficiale (concept). Repo: https://github.com/gaiaz/webuild
+Prototipo editoriale non ufficiale (concept). Repo: https://github.com/cmarino-hdraadv/webuild
 
 ## Comandi
 
@@ -179,8 +179,9 @@ endframe (ora la linea ripercorre le geometrie della storia e si distende).
 4. Feedback recepito: skyline Backlog ridisegnata (setback, telai, gru a traliccio),
    niente sovrapposizioni testo (stat in flusso, mai overlay assoluti sui titoli).
 
-**Git**: repo `origin` = https://github.com/gaiaz/webuild.git, branch `main`.
-Gaia vuole commit + push dei progressi ("pusha e committa tutto qui").
+**Git**: repo `origin` = https://github.com/cmarino-hdraadv/webuild.git, branch `main`
+(migrato da gaiaz/webuild il 31/08/2026, tenuto come remote `gaiaz-old` per
+riferimento). Gaia vuole commit + push dei progressi ("pusha e committa tutto qui").
 
 ## Deploy (Vercel)
 
