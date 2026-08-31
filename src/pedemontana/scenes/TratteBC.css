@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background: var(--color-bg-tint);
 }
 
 .trattebc__inner {
@@ -21,16 +22,18 @@
 
 .trattebc__figure {
   font-size: var(--fs-4);
+  color: var(--color-accent);
 }
 
 .trattebc__unit {
-  font-size: 0.4em;
+  font-size: 0.691em; /* 96px / 138.842px, rapporto esatto Figma */
   font-weight: 700;
 }
 
 .trattebc__caption {
   font-size: var(--fs-8);
   max-width: 26ch;
+  color: var(--color-text-primary);
 }
 
 .trattebc__viz svg {
@@ -38,45 +41,49 @@
   height: auto;
 }
 
-.trattebc__ghost {
-  stroke: var(--color-border);
-  stroke-width: 2;
+/* ─── Nastro stradale: tracciato ripreso 1:1 dall'asset Figma ─── */
+.trattebc__ribbon {
+  stroke: var(--color-bg-base);
+  stroke-width: 38;
   fill: none;
 }
 
-.trattebc__seg {
+.trattebc__route {
   stroke: var(--color-accent);
-  stroke-width: 7;
+  stroke-width: 16;
+  stroke-dasharray: 2.13 2.13;
   fill: none;
-  stroke-linecap: round;
 }
 
 .trattebc__end-ring {
   fill: var(--color-bg-base);
   stroke: var(--color-text-primary);
-  stroke-width: 2;
+  stroke-width: 1.1;
 }
 
 .trattebc__end-lbl {
-  font-family: var(--font-mono);
-  font-size: 18px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12.8px;
   fill: var(--color-text-primary);
 }
 
 .trattebc__bracket {
-  stroke: var(--color-text-secondary);
-  stroke-width: 1.5;
+  stroke: var(--color-accent);
+  stroke-width: 4;
   fill: none;
 }
 
 .trattebc__quota {
-  font-family: var(--font-mono);
-  font-size: 18px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  fill: var(--color-text-secondary);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-stretch: 75%;
+  font-size: 25.8px;
+  fill: var(--color-text-primary);
+}
+
+.trattebc__quota-num {
+  font-weight: 900;
 }
 
 .trattebc__consorzio {

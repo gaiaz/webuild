@@ -22,21 +22,31 @@
   height: auto;
 }
 
-.sottosup__hatch {
-  stroke: var(--color-border-night);
-  stroke-width: 1.5;
+/* Area scavata: pattern tratteggiato ripreso dal Figma (tinta quasi nera +
+   diagonali più chiare), non più singoli trattini sparsi. */
+.sottosup__fill {
+  fill: url(#sottosup-hatch);
+}
+
+.sottosup__hatch-bg {
+  fill: var(--color-bg-night-subtle);
+}
+
+.sottosup__hatch-line {
+  stroke: var(--color-line-night);
+  stroke-width: 1;
   fill: none;
 }
 
 .sottosup__surface {
   stroke: var(--color-text-inverse);
-  stroke-width: 2.5;
+  stroke-width: 15;
   fill: none;
 }
 
 .sottosup__route {
   stroke: var(--color-accent);
-  stroke-width: 5;
+  stroke-width: 15;
   fill: none;
   stroke-linecap: round;
 }

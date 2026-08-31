@@ -162,7 +162,7 @@ const Hero = () => {
             />
           </span>
           <p className="pede-hero__meta annotation">
-            Sotto la superficie — scroll narration
+            Scrolla per approfondire
           </p>
         </div>
       </div>

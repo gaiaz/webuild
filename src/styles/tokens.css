@@ -24,6 +24,7 @@
   --wb-night-ink: #a0a0a0;
   --wb-forest-900: #0a1410;
   --wb-forest-300: #9dbfae;
+  --wb-red-100: #fdd5dc; /* tinta rosa, sfondo di sezione */
 
   /* ─── Semantic colors ─── */
   --color-accent: var(--wb-red-600);
@@ -33,6 +34,9 @@
   --color-bg-subtle: var(--wb-paper-200);
   --color-bg-night: var(--wb-night-900);
   --color-bg-forest: var(--wb-forest-900);
+  --color-bg-tint: var(--wb-red-100);
+  --color-bg-night-subtle: var(--wb-night-700);
+  --color-line-night: var(--wb-night-500);
   --color-text-primary: var(--wb-ink-900);
   --color-text-secondary: var(--wb-steel-500);
   --color-text-inverse: #ffffff;

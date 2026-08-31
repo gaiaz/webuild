@@ -120,21 +120,29 @@
   }
 
   .trace-nav__label {
-    display: inline;
+    display: inline-block;
+    max-width: 92px;
+    line-height: 1.25;
     opacity: 0;
     transform: translateX(-4px);
     transition: opacity var(--transition-normal), transform var(--transition-normal);
   }
 
+  .trace-nav__node {
+    font-size: 11px;
+  }
+}
+
+/* Sotto i 1600px il margine fisso del container (80px) non basta a
+   contenere l'etichetta nemmeno su due righe: il testo del capitolo
+   finirebbe sempre sovrapposto ai contenuti. La mostriamo solo dove
+   il gutter centrato del container offre spazio a sufficienza. */
+@media (min-width: 1600px) {
   .trace-nav__node:hover .trace-nav__label,
   .trace-nav__node:focus-visible .trace-nav__label,
   .trace-nav__node--active .trace-nav__label {
     opacity: 1;
     transform: none;
-  }
-
-  .trace-nav__node {
-    font-size: 11px;
   }
 }
 

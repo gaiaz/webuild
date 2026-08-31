@@ -10,12 +10,18 @@
 
 .beneficio__title {
   font-size: var(--fs-7);
-  max-width: 30ch;
+  max-width: 38ch;
 }
 
 .beneficio__plate svg {
   width: 100%;
   height: auto;
+}
+
+/* ─── Skyline in filigrana: continuità urbana dietro agli alberi ─── */
+.beneficio__building {
+  fill: var(--color-border);
+  opacity: 0.7;
 }
 
 .beneficio__tree line {
@@ -24,7 +30,7 @@
 }
 
 .beneficio__tree circle {
-  fill: none;
+  fill: var(--color-bg-base);
   stroke: var(--color-text-secondary);
   stroke-width: 1.5;
 }
@@ -40,10 +46,28 @@
   stroke-dasharray: 10 12;
 }
 
+/* ─── Il terreno fra i due livelli: stessa texture a tratteggio di
+   "Sotto la superficie", in tono chiaro per il registro editoriale ─── */
+.beneficio__earth-bg {
+  fill: var(--color-bg-subtle);
+}
+
+.beneficio__earth-line {
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
 .beneficio__tunnel {
-  fill: none;
+  fill: var(--color-bg-base);
   stroke: var(--color-accent);
   stroke-width: 3;
+}
+
+/* Anelli strutturali del rivestimento, in filigrana sul tubo */
+.beneficio__ring {
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+  opacity: 0.3;
 }
 
 .beneficio__lane {
@@ -51,6 +75,37 @@
   stroke-width: 1.5;
   stroke-dasharray: 16 14;
   opacity: 0.6;
+}
+
+/* ─── Traffico continuo: sopra locale, sotto veloce ─── */
+.beneficio__car rect {
+  fill: var(--color-text-primary);
+}
+
+.beneficio__car circle {
+  fill: var(--color-text-primary);
+}
+
+.beneficio__tunnel-car rect {
+  fill: var(--color-accent);
+}
+
+.beneficio__tunnel-car circle {
+  fill: var(--color-accent-deep);
+}
+
+/* Senza animazione le auto restano "parcheggiate" in scena, non ammassate
+   al bordo sinistro dov'è il loro punto di partenza dell'animazione. */
+[data-motion='reduced'] .beneficio__car--a {
+  transform: translateX(300px);
+}
+
+[data-motion='reduced'] .beneficio__car--b {
+  transform: translateX(820px);
+}
+
+[data-motion='reduced'] .beneficio__tunnel-car {
+  transform: translateX(520px);
 }
 
 .beneficio__lbl {

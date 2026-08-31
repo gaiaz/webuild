@@ -8,16 +8,20 @@ import './SottoSuperficie.css'
  * 05 — Sotto la superficie. La scena chiave: il profilo longitudinale.
  * La linea del territorio resta continua in alto; la strada scende
  * in trincea e in galleria. Tema night: siamo sottoterra.
+ *
+ * Geometria (viewBox 0 0 1280 405) ripresa 1:1 dal frame Figma di
+ * riferimento: superficie, tracciato e area scavata (riempita da un
+ * pattern tratteggiato) sono gli stessi tre elementi separati di prima,
+ * solo con il profilo esatto del Figma al posto di quello disegnato a mano.
  */
-const SURFACE_D = 'M 0 150 L 180 146 L 400 154 L 640 148 L 880 155 L 1100 149 L 1200 152'
+const SURFACE_D =
+  'M -0.5 74.67 L 191.5 70.4 L 426.17 78.93 L 682.17 72.53 L 938.17 80 L 1172.83 73.6 L 1279.5 76.8'
 // Profilo della strada: superficie → trincea → galleria → risalita
 const ROUTE_D =
-  'M 20 150 L 150 152 C 240 156 260 260 340 268 L 520 274 C 600 278 620 380 700 384 L 900 386 C 990 384 1010 240 1090 200 L 1180 158'
-
-const HATCHES = Array.from({ length: 30 }, (_, i) => {
-  const x = 40 + i * 40
-  return `M ${x} ${170 + (i % 3) * 8} l 22 -14`
-})
+  'M 13 75 L 154.37 90.64 C 247.4 94.91 268.07 205.96 350.76 214.5 L 536.81 220.91 C 619.5 225.18 640.17 334.09 722.86 338.36 L 929.59 340.5 C 1022.61 338.36 1043.28 184.6 1125.97 141.89 L 1236 77.5'
+// Area scavata: stessa curva del tracciato, richiusa sulla superficie
+const FILL_D =
+  'M154.37 90.39 L13 74.75 L1236 77.25 L1125.97 141.64 C1043.28 184.35 1022.61 338.11 929.59 340.25 L722.86 338.11 C640.17 333.84 619.5 224.93 536.81 220.66 L350.76 214.25 C268.07 205.71 247.4 94.66 154.37 90.39 Z'
 
 const SottoSuperficie = () => {
   const rootRef = useRef(null)
@@ -30,10 +34,11 @@ const SottoSuperficie = () => {
       const counter = { p: 0, k: 0 }
       prepStroke(tl, '.sottosup__route', root)
         prepStroke(tl, '.sottosup__surface', root)
+        .set('.sottosup__fill', { opacity: 0 }, 0)
         .to('.sottosup__surface', { strokeDashoffset: 0, duration: 1 })
-        .fromTo('.sottosup__hatch', { opacity: 0 }, { opacity: 0.5, duration: 0.8 }, '-=0.4')
-        // la strada scende
+        // la strada scende: l'area scavata si rivela insieme al tracciato
         .to('.sottosup__route', { strokeDashoffset: 0, duration: 2.2 }, '+=0.2')
+        .to('.sottosup__fill', { opacity: 1, duration: 1.8 }, '<')
         .to(
           counter,
           {
@@ -79,15 +84,27 @@ const SottoSuperficie = () => {
           role="img"
           aria-label="Profilo longitudinale delle tratte B2 e C: la linea del territorio resta continua in superficie, mentre la strada scende in trincea e in galleria per l'85% del tracciato."
         >
-          <svg viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            {HATCHES.map((d) => (
-              <path key={d} className="sottosup__hatch" d={d} />
-            ))}
-            <path className="sottosup__surface" d={SURFACE_D} />
+          <svg viewBox="0 0 1280 405" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              {/* Diagonale "/" ripresa 1:1 dal Figma: una linea per tile,
+                  duplicata su tre traslazioni per restare continua al
+                  bordo (stessa tecnica dell'export originale). */}
+              <pattern id="sottosup-hatch" patternUnits="userSpaceOnUse" width="14" height="14">
+                <rect width="14" height="14" className="sottosup__hatch-bg" />
+                <path
+                  d="M0 14 L14 0 M-3.5 3.5 L3.5 -3.5 M10.5 17.5 L17.5 10.5"
+                  className="sottosup__hatch-line"
+                />
+              </pattern>
+            </defs>
+            <path className="sottosup__fill" d={FILL_D} />
+            {/* il tracciato si disegna prima: la superficie deve restare
+                sempre sopra, anche dove le due linee si toccano ai bordi */}
             <path className="sottosup__route" d={ROUTE_D} />
-            <text className="sottosup__zone" x="430" y="320">trincea</text>
-            <text className="sottosup__zone" x="790" y="430">galleria</text>
-            <text className="sottosup__zone sottosup__zone--surface" x="60" y="120">
+            <path className="sottosup__surface" d={SURFACE_D} />
+            <text className="sottosup__zone" x="440" y="270">trincea</text>
+            <text className="sottosup__zone" x="820" y="380">galleria</text>
+            <text className="sottosup__zone sottosup__zone--surface" x="60" y="50">
               superficie
             </text>
           </svg>
