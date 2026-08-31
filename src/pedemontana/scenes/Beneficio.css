@@ -1,11 +1,16 @@
 .beneficio {
-  padding-block: var(--space-32);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
 .beneficio__inner {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
+  padding-block: var(--space-16);
 }
 
 .beneficio__title {
@@ -57,24 +62,22 @@
   stroke-width: 1;
 }
 
-.beneficio__tunnel {
+/* Canale aperto ai due bordi: il vuoto scavato (bianco) fra due bordi
+   strutturali (soffitto/platea), non un tubo chiuso — la strada che vi
+   corre dentro (la corsia rossa) continua visibilmente oltre la cornice. */
+.beneficio__tunnel-fill {
   fill: var(--color-bg-base);
-  stroke: var(--color-accent);
-  stroke-width: 3;
 }
 
-/* Anelli strutturali del rivestimento, in filigrana sul tubo */
-.beneficio__ring {
-  stroke: var(--color-accent);
-  stroke-width: 1.5;
-  opacity: 0.3;
+.beneficio__tunnel-edge {
+  stroke: var(--color-text-primary);
+  stroke-width: 3;
 }
 
 .beneficio__lane {
   stroke: var(--color-accent);
-  stroke-width: 1.5;
+  stroke-width: 2;
   stroke-dasharray: 16 14;
-  opacity: 0.6;
 }
 
 /* ─── Traffico continuo: sopra locale, sotto veloce ─── */

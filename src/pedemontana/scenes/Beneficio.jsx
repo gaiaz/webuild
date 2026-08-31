@@ -1,15 +1,17 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, REDUCED_MOTION } from '../../lib/gsap'
-import { useReveal } from '../../lib/useReveal'
+import { prepStroke } from '../../lib/drawStroke'
+import { useSceneTimeline } from '../../lib/useSceneTimeline'
 import './Beneficio.css'
 
 /**
- * 06 — Il beneficio. Registro editoriale, non pinnato:
- * i due livelli sovrapposti — sopra la vita quotidiana, sotto l'autostrada.
- * Sotto la strada scorre il traffico locale (alberi, edifici, auto che
- * viaggiano lente); sotto terra il traffico veloce dell'autostrada in
- * galleria — due velocità diverse a rendere tangibile "vita quotidiana"
- * sopra e infrastruttura sotto.
+ * 06 — Il beneficio. Scena pinnata: la città in superficie si costruisce
+ * per prima (edifici, alberi, strada, traffico locale), poi il terreno si
+ * apre sul tunnel sottostante (anelli, corsia, traffico veloce) — gli
+ * stessi due livelli sovrapposti di prima, ora scanditi dallo scroll
+ * invece che rivelati tutti insieme. Il traffico continuo (auto che
+ * viaggiano) resta un loop indipendente, non scrubbato: comincia a
+ * scorrere quando ciascun livello diventa visibile e non si ferma più.
  */
 const TREES = [140, 320, 520, 700, 900, 1060]
 const BUILDINGS = [
@@ -21,15 +23,13 @@ const BUILDINGS = [
   { x: 975, w: 62, h: 80 },
   { x: 1095, w: 58, h: 60 },
 ]
-const RINGS = Array.from({ length: 13 }, (_, i) => 158 + i * 68)
 
 const Beneficio = () => {
   const rootRef = useRef(null)
-  useReveal(rootRef)
 
-  // Traffico continuo, indipendente dallo scroll: la scena non è pinnata,
-  // quindi due loop separati (locale in superficie, veloce in galleria)
-  // restano semplicemente "vivi" mentre la si legge.
+  // Traffico continuo, indipendente dallo scroll: una volta rivelate (dalla
+  // timeline scrubbata qui sotto) le auto continuano a scorrere da sole,
+  // in loop, invece di restare ferme in scena.
   useLayoutEffect(() => {
     if (REDUCED_MOTION) return undefined
     const ctx = gsap.context(() => {
@@ -43,14 +43,48 @@ const Beneficio = () => {
     return () => ctx.revert()
   }, [])
 
+  useSceneTimeline(
+    rootRef,
+    ({ tl, root }) => {
+      prepStroke(tl, '.beneficio__street', root)
+      tl.set('.beneficio__building', { opacity: 0 }, 0)
+        .set('.beneficio__tree', { opacity: 0, y: 10 }, 0)
+        .set('.beneficio__street-dash', { opacity: 0 }, 0)
+        .set('.beneficio__car--a, .beneficio__car--b', { opacity: 0 }, 0)
+        .set('.beneficio__lbl:not(.beneficio__lbl--under)', { opacity: 0 }, 0)
+        .set('.beneficio__earth', { opacity: 0 }, 0)
+        .set('.beneficio__tunnel', { scaleY: 0, transformOrigin: '50% 0%' }, 0)
+        .set('.beneficio__lane', { opacity: 0 }, 0)
+        .set('.beneficio__tunnel-car', { opacity: 0 }, 0)
+        .set('.beneficio__lbl--under', { opacity: 0 }, 0)
+        // 1 — la città in superficie: edifici, alberi, strada e traffico
+        .to('.beneficio__building', { opacity: 0.7, duration: 0.4, stagger: 0.05 })
+        .to('.beneficio__tree', { opacity: 1, y: 0, duration: 0.4, stagger: 0.08 }, '<0.15')
+        .to('.beneficio__street', { strokeDashoffset: 0, duration: 0.8 }, '<')
+        .to('.beneficio__street-dash', { opacity: 1, duration: 0.4 }, '<0.4')
+        .to('.beneficio__car--a, .beneficio__car--b', { opacity: 1, duration: 0.3 }, '<')
+        .to('.beneficio__lbl:not(.beneficio__lbl--under)', { opacity: 1, duration: 0.3 }, '<')
+        // 2 — il terreno si apre sul tunnel sottostante
+        .to('.beneficio__earth', { opacity: 1, duration: 0.6 }, '+=0.3')
+        .to('.beneficio__tunnel', { scaleY: 1, duration: 0.9 }, '<0.2')
+        .to('.beneficio__lane', { opacity: 1, duration: 0.5 }, '<0.3')
+        .to('.beneficio__tunnel-car', { opacity: 1, duration: 0.3 }, '<')
+        .to('.beneficio__lbl--under', { opacity: 1, duration: 0.3 }, '<')
+        // 3 — il testo chiude la scena
+        .fromTo('.beneficio__body', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, '+=0.3')
+        .to({}, { duration: 0.5 })
+    },
+    { end: '+=380%' }
+  )
+
   return (
     <section ref={rootRef} className="beneficio" aria-labelledby="beneficio-title">
       <div className="beneficio__inner container">
         <header className="beneficio__head">
-          <p className="annotation annotation--accent" data-reveal>
+          <p className="annotation annotation--accent">
             06 / 17 — Il beneficio
           </p>
-          <h2 id="beneficio-title" className="beneficio__title display" data-reveal>
+          <h2 id="beneficio-title" className="beneficio__title display">
             Un'infrastruttura che tutela spazi,
             <br />
             connessioni e vita quotidiana.
@@ -61,7 +95,6 @@ const Beneficio = () => {
           className="beneficio__plate"
           role="img"
           aria-label="Sezione a due livelli: in superficie edifici, alberi e traffico locale continuano indisturbati; sotto, l'autostrada in galleria scorre veloce."
-          data-reveal
         >
           <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <defs>
@@ -112,28 +145,30 @@ const Beneficio = () => {
             </g>
 
             {/* il terreno fra i due livelli */}
-            <rect x="0" y="150" width="1200" height="270" fill="url(#beneficio-earth)" />
+            <rect className="beneficio__earth" x="0" y="150" width="1200" height="270" fill="url(#beneficio-earth)" />
 
-            {/* sotto: il tubo dell'autostrada, coi suoi anelli, e il traffico veloce */}
-            <rect className="beneficio__tunnel" x="120" y="250" width="960" height="110" rx="14" />
-            {RINGS.map((x) => (
-              <line key={x} className="beneficio__ring" x1={x} y1="252" x2={x} y2="358" />
-            ))}
-            <line className="beneficio__lane" x1="160" y1="305" x2="1040" y2="305" />
+            {/* sotto: il canale dell'autostrada, aperto ai due bordi — la
+                strada prosegue prima e dopo la galleria, non finisce lì */}
+            <g className="beneficio__tunnel">
+              <rect className="beneficio__tunnel-fill" x="0" y="250" width="1200" height="110" />
+              <line className="beneficio__tunnel-edge" x1="0" y1="250" x2="1200" y2="250" />
+              <line className="beneficio__tunnel-edge" x1="0" y1="360" x2="1200" y2="360" />
+            </g>
+            <line className="beneficio__lane" x1="0" y1="305" x2="1200" y2="305" />
             <g className="beneficio__tunnel-car">
               <rect x="-18" y="292" width="36" height="13" rx="3.5" />
               <circle cx="-9" cy="305" r="4" />
               <circle cx="9" cy="305" r="4" />
             </g>
 
-            <text className="beneficio__lbl" x="60" y="128">superficie</text>
+            <text className="beneficio__lbl" x="60" y="176">superficie</text>
             <text className="beneficio__lbl beneficio__lbl--under" x="60" y="398">
               autostrada in galleria
             </text>
           </svg>
         </div>
 
-        <p className="beneficio__body" data-reveal>
+        <p className="beneficio__body">
           L'interramento riduce l'impatto visivo e acustico e preserva la
           continuità urbana dei luoghi attraversati.
         </p>

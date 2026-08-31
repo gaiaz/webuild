@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background: var(--color-bg-subtle);
 }
 
 .metodo__inner {
@@ -62,18 +63,41 @@
   height: auto;
 }
 
-.metodo__hatch {
+/* Terreno: stesso linguaggio (pattern a tratteggio) di "Sotto la
+   superficie" e "Il beneficio", qui in tono chiaro per il registro
+   editoriale a piena luce di questa scena. */
+.metodo__earth-bg {
+  fill: var(--color-bg-subtle);
+}
+
+.metodo__earth-line {
   stroke: var(--color-border);
-  stroke-width: 1.5;
+  stroke-width: 1;
   fill: none;
 }
 
-.metodo__wall {
+.metodo__wall-body {
   fill: var(--color-text-primary);
 }
 
-.metodo__slab {
+.metodo__wall-cap {
   fill: var(--color-text-primary);
+}
+
+.metodo__wall-joint {
+  stroke: var(--color-bg-base);
+  stroke-width: 1.5;
+  opacity: 0.35;
+}
+
+.metodo__slab-body {
+  fill: var(--color-text-primary);
+}
+
+.metodo__slab-hatch {
+  stroke: var(--color-bg-base);
+  stroke-width: 1.5;
+  opacity: 0.3;
 }
 
 .metodo__surface-line {
@@ -93,8 +117,28 @@
   stroke-width: 1.5;
 }
 
-.metodo__dig {
+circle.metodo__lamp-head {
+  fill: var(--color-text-secondary);
+  stroke: none;
+}
+
+.metodo__deco-car rect {
+  fill: var(--color-text-secondary);
+}
+
+.metodo__deco-car circle {
+  fill: var(--color-text-secondary);
+  stroke: none;
+}
+
+.metodo__dig-body {
   fill: var(--color-bg-subtle);
+}
+
+.metodo__strut {
+  stroke: var(--color-text-secondary);
+  stroke-width: 2;
+  opacity: 0.5;
 }
 
 .metodo__road {
