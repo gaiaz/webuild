@@ -70,10 +70,10 @@ const Bosco = () => {
     >
       <div className="bosco__inner container">
         <header className="bosco__head">
-          <p className="annotation annotation--accent">12 / 17 — Bosco</p>
+          <p className="annotation annotation--accent">12 / 17 — Ambiente</p>
           <h2 id="bosco-title" className="bosco__title display">
-            Il verde non è solo da proteggere.
-            <br />È da far crescere.
+            Proteggere la natura,
+            <br />aumentare le aree verdi.
           </h2>
           <p className="bosco__figure big-number">
             <span ref={haRef}>{String(PEDE.ettariVerde).replace('.', ',')}</span>

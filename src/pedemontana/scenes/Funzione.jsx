@@ -74,11 +74,11 @@ const Funzione = () => {
     <section ref={rootRef} className="funzione" aria-labelledby="funzione-title">
       <div className="funzione__inner container">
         <header className="funzione__head">
-          <p className="annotation annotation--accent">03 / 17 — La funzione</p>
+          <p className="annotation annotation--accent">03 / 17 — L'idea</p>
           <h2 id="funzione-title" className="funzione__title display">
-            Dove oggi i flussi si concentrano,
+            Dalla concentrazione dei flussi,
             <br />
-            domani le connessioni si moltiplicano.
+            alla moltiplicazione delle connessioni.
           </h2>
         </header>
 

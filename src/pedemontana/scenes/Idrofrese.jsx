@@ -49,9 +49,7 @@ const Idrofrese = () => {
         <header className="idrofrese__head">
           <p className="annotation annotation--accent">08 / 17 — Idrofrese</p>
           <h2 id="idrofrese-title" className="idrofrese__title display">
-            Quando il terreno è duro come il calcestruzzo,
-            <br />
-            l'ingegneria cambia passo.
+            Un'ingegneria profondamente nuova.
           </h2>
         </header>
 

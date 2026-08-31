@@ -34,9 +34,9 @@ const Ferrovie = () => {
         <header className="ferrovie__head">
           <p className="annotation annotation--accent">09 / 17 — Ferrovie</p>
           <h2 id="ferrovie-title" className="ferrovie__title display">
-            Sotto, il cantiere avanza.
+            Mentre gli scavi avanzano,
             <br />
-            Sopra, i treni continuano a viaggiare.
+            i treni viaggiano in superficie.
           </h2>
         </header>
 

@@ -20,9 +20,9 @@ const Beneficio = () => {
             06 / 17 — Il beneficio
           </p>
           <h2 id="beneficio-title" className="beneficio__title display" data-reveal>
-            Sotto, una nuova autostrada.
+            Un'infrastruttura che tutela spazi,
             <br />
-            Sopra, spazi, connessioni e vita quotidiana.
+            connessioni e vita quotidiana.
           </h2>
         </header>
 

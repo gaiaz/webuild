@@ -11,7 +11,7 @@ const PANELS = [
     id: 'smart-road',
     num: '13 / 17',
     meta: 'Smart Road · C-ITS',
-    title: 'Non è solo una strada da percorrere. È una strada che comunica.',
+    title: 'Big data e grandi opportunità.',
     fact: 'Zero caselli. Pedaggio Free Flow. Sistemi C-ITS e comunicazione tra veicolo e infrastruttura.',
     note: 'I portali rilevano i veicoli e scambiano dati su traffico, meteo e sicurezza.',
     plate: (
@@ -44,7 +44,7 @@ const PANELS = [
     id: 'monitoraggio',
     num: '14 / 17',
     meta: 'Monitoraggio permanente',
-    title: 'Una strada che conosce il proprio stato. E può prevedere ciò di cui avrà bisogno.',
+    title: 'Una strada sempre connessa.',
     fact: 'Il monitoraggio permanente rileva carichi, vibrazioni, deformazioni e temperatura per rendere la manutenzione più tempestiva e mirata.',
     note: 'I dati attraversano ponti e gallerie come impulsi; le anomalie vengono identificate in anticipo.',
     plate: (

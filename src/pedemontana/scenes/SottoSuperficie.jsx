@@ -68,9 +68,9 @@ const SottoSuperficie = () => {
         <header className="sottosup__head">
           <p className="annotation annotation--accent">05 / 17 — Sotto la superficie</p>
           <h2 id="sottosup-title" className="sottosup__title display">
-            La strada scende.
+            Un'arteria vitale
             <br />
-            Il territorio resta continuo.
+            che scorre sotterranea.
           </h2>
         </header>
 

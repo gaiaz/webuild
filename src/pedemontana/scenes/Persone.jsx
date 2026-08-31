@@ -83,9 +83,7 @@ const Persone = () => {
           <p className="annotation annotation--accent">15 / 17 — Persone</p>
           <h2 id="persone-title" className="persone__title">
             <span className="persone__caption display">
-              Dietro ogni metro costruito,
-              <br />
-              migliaia di competenze in movimento.
+              Migliaia di competenze in movimento.
             </span>
             <span ref={countRef} className="big-number persone__figure-num">
               ~{fmtInt(PEDE.personePicco)}

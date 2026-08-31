@@ -174,9 +174,7 @@ const Chiusura = () => {
 
         <h2 id="chiusura-title" className="chiusura__claims">
           <span className="chiusura__claim chiusura__claim--one display">
-            Non solo una nuova strada.
-            <br />
-            Un nuovo modo di attraversare il territorio.
+            Autostrada Pedemontana Lombarda.
           </span>
           <span className="chiusura__claim chiusura__claim--two display">
             Un nuovo modo di connettere
