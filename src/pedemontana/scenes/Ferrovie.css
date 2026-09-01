@@ -23,18 +23,49 @@
   height: auto;
 }
 
-.ferrovie__sleeper {
+.ferrovie__ballast-bg {
+  fill: var(--color-bg-subtle);
+}
+
+.ferrovie__ballast-line {
   stroke: var(--color-border);
-  stroke-width: 2;
+  stroke-width: 1;
+  fill: none;
+}
+
+.ferrovie__sleeper {
+  stroke: var(--color-text-secondary);
+  stroke-width: 5;
 }
 
 .ferrovie__rail {
   stroke: var(--color-text-primary);
-  stroke-width: 2.5;
+  stroke-width: 3;
 }
 
-.ferrovie__train rect {
+.ferrovie__carriage-body {
   fill: var(--color-text-primary);
+}
+
+.ferrovie__window {
+  fill: var(--color-bg-base);
+}
+
+.ferrovie__wheel {
+  fill: var(--color-text-primary);
+}
+
+.ferrovie__pantograph {
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ferrovie__coupling {
+  stroke: var(--color-text-primary);
+  stroke-width: 3;
 }
 
 .ferrovie__box {

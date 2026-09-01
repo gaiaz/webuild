@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background: var(--color-bg-tint);
 }
 
 .idrofrese__inner {
@@ -36,25 +37,13 @@
   height: auto;
 }
 
-.idrofrese__surface {
-  stroke: var(--color-text-primary);
-  stroke-width: 2.5;
+.idrofrese__ceppo-bg {
+  fill: var(--color-bg-subtle);
 }
 
-.idrofrese__rig line {
-  stroke: var(--color-text-primary);
-  stroke-width: 2.5;
-}
-
-.idrofrese__rig rect {
-  fill: none;
-  stroke: var(--color-text-primary);
-  stroke-width: 2.5;
-}
-
-.idrofrese__ceppo path {
+.idrofrese__ceppo-line {
   stroke: var(--color-border);
-  stroke-width: 1.5;
+  stroke-width: 1;
   fill: none;
 }
 
@@ -66,23 +55,57 @@
   fill: var(--color-text-secondary);
 }
 
+.idrofrese__surface {
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+}
+
+/* Gru cingolata: cingoli, cabina, torre e contrappeso a corpo pieno,
+   come i diaframmi di Metodo Milano — stessa grammatica visiva. */
+.idrofrese__rig-solid {
+  fill: var(--color-text-primary);
+}
+
+.idrofrese__rig-lattice {
+  stroke: var(--color-bg-tint);
+  stroke-width: 2;
+}
+
+.idrofrese__rig-strut {
+  stroke: var(--color-text-primary);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.idrofrese__rig-ring {
+  fill: none;
+  stroke: var(--color-text-primary);
+  stroke-width: 3;
+}
+
+.idrofrese__kelly {
+  fill: var(--color-text-primary);
+}
+
+/* Il pannello scavato: il vuoto bianco che l'idrofresa apre nel
+   terreno tratteggiato. */
 .idrofrese__cut {
-  fill: var(--color-bg-subtle);
+  fill: var(--color-bg-base);
   stroke: var(--color-accent);
   stroke-width: 2;
 }
 
-.idrofrese__cutter line {
+.idrofrese__cutter-body {
+  fill: var(--color-accent);
+}
+
+.idrofrese__wheel circle {
+  fill: var(--color-bg-base);
   stroke: var(--color-accent);
   stroke-width: 2.5;
 }
 
-.idrofrese__cutter rect {
-  fill: var(--color-accent);
-}
-
-.idrofrese__cutter circle {
-  fill: none;
+.idrofrese__wheel line {
   stroke: var(--color-accent);
   stroke-width: 2;
 }

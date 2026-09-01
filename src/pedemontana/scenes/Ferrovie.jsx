@@ -9,6 +9,44 @@ import './Ferrovie.css'
  */
 const RAIL_Y = 190
 const SLEEPERS = Array.from({ length: 26 }, (_, i) => 60 + i * 42)
+const CARRIAGE_W = 130
+const CARRIAGE_H = 38
+const CARRIAGE_GAP = 10
+const WINDOW_W = 20
+const WINDOW_H = 15
+const WINDOW_COUNT = 4
+
+const Carriage = ({ x, pantograph }) => {
+  const top = RAIL_Y - 8 - CARRIAGE_H
+  const bottom = RAIL_Y - 8
+  const winGap = (CARRIAGE_W - WINDOW_COUNT * WINDOW_W) / (WINDOW_COUNT + 1)
+  return (
+    <g className="ferrovie__carriage">
+      {pantograph && (
+        <path
+          className="ferrovie__pantograph"
+          d={`M ${x + CARRIAGE_W / 2 - 14} ${top} L ${x + CARRIAGE_W / 2 - 6} ${top - 16} L ${
+            x + CARRIAGE_W / 2 + 6
+          } ${top - 16} L ${x + CARRIAGE_W / 2 + 14} ${top}`}
+        />
+      )}
+      <rect className="ferrovie__carriage-body" x={x} y={top} width={CARRIAGE_W} height={CARRIAGE_H} rx="10" />
+      {Array.from({ length: WINDOW_COUNT }, (_, i) => (
+        <rect
+          key={i}
+          className="ferrovie__window"
+          x={x + winGap + i * (WINDOW_W + winGap)}
+          y={top + 9}
+          width={WINDOW_W}
+          height={WINDOW_H}
+          rx="3"
+        />
+      ))}
+      <circle className="ferrovie__wheel" cx={x + 26} cy={bottom - 4} r="8" />
+      <circle className="ferrovie__wheel" cx={x + CARRIAGE_W - 26} cy={bottom - 4} r="8" />
+    </g>
+  )
+}
 
 const Ferrovie = () => {
   const rootRef = useRef(null)
@@ -19,7 +57,7 @@ const Ferrovie = () => {
       tl.set('.ferrovie__monolite', { x: -420 }, 0)
         .fromTo('.ferrovie__rail-group', { opacity: 0 }, { opacity: 1, duration: 0.7 })
         // il treno attraversa mentre il monolite avanza
-        .fromTo('.ferrovie__train', { x: -260 }, { x: 1300, duration: 3, ease: 'none' }, '+=0.2')
+        .fromTo('.ferrovie__train', { x: -290 }, { x: 1300, duration: 3, ease: 'none' }, '+=0.2')
         .to('.ferrovie__monolite', { x: 0, duration: 3, ease: 'none' }, '<')
         .fromTo('.ferrovie__lines-note', { opacity: 0 }, { opacity: 1, duration: 0.5 }, '-=0.8')
         .fromTo('.ferrovie__body', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, '+=0.3')
@@ -46,17 +84,35 @@ const Ferrovie = () => {
           aria-label="Il monolite della galleria avanza sotto i binari mentre il treno continua il proprio percorso: tre linee ferroviarie in esercizio attraversate senza interrompere il traffico."
         >
           <svg viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <pattern id="ferrovie-ballast" patternUnits="userSpaceOnUse" width="14" height="14">
+                <rect width="14" height="14" className="ferrovie__ballast-bg" />
+                <path
+                  d="M0 14 L14 0 M-3.5 3.5 L3.5 -3.5 M10.5 17.5 L17.5 10.5"
+                  className="ferrovie__ballast-line"
+                />
+              </pattern>
+            </defs>
             <g className="ferrovie__rail-group">
+              <rect x="0" y={RAIL_Y - 26} width="1200" height="56" fill="url(#ferrovie-ballast)" />
               {SLEEPERS.map((x) => (
-                <line key={x} className="ferrovie__sleeper" x1={x} y1={RAIL_Y - 8} x2={x} y2={RAIL_Y + 8} />
+                <line key={x} className="ferrovie__sleeper" x1={x} y1={RAIL_Y - 16} x2={x} y2={RAIL_Y + 16} />
               ))}
               <line className="ferrovie__rail" x1="40" y1={RAIL_Y - 8} x2="1160" y2={RAIL_Y - 8} />
               <line className="ferrovie__rail" x1="40" y1={RAIL_Y + 8} x2="1160" y2={RAIL_Y + 8} />
             </g>
-            {/* treno in esercizio */}
+            {/* treno in esercizio: due casse con finestrini, ruote e
+                pantografo sulla motrice */}
             <g className="ferrovie__train">
-              <rect x="0" y={RAIL_Y - 52} width="120" height="36" rx="8" />
-              <rect x="128" y={RAIL_Y - 52} width="120" height="36" rx="8" />
+              <Carriage x={0} pantograph />
+              <Carriage x={CARRIAGE_W + CARRIAGE_GAP} />
+              <line
+                className="ferrovie__coupling"
+                x1={CARRIAGE_W}
+                y1={RAIL_Y - 8 - CARRIAGE_H / 2}
+                x2={CARRIAGE_W + CARRIAGE_GAP}
+                y2={RAIL_Y - 8 - CARRIAGE_H / 2}
+              />
             </g>
             {/* il monolite che avanza sotto */}
             <g className="ferrovie__monolite">

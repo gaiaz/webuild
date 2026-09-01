@@ -24,12 +24,14 @@
   --wb-night-ink: #a0a0a0;
   --wb-forest-900: #0a1410;
   --wb-forest-300: #9dbfae;
+  --wb-forest-bright: #6af5b8; /* verde acceso: illustrazione della scena Bosco */
   --wb-red-100: #fdd5dc; /* tinta rosa, sfondo di sezione */
 
   /* ─── Semantic colors ─── */
   --color-accent: var(--wb-red-600);
   --color-accent-deep: var(--wb-red-700);
   --color-accent-on-dark: var(--wb-red-400);
+  --color-accent-forest: var(--wb-forest-bright);
   --color-bg-base: var(--wb-paper-100);
   --color-bg-subtle: var(--wb-paper-200);
   --color-bg-night: var(--wb-night-900);

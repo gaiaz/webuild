@@ -20,7 +20,7 @@
 
 .bosco__figure {
   font-size: var(--fs-5);
-  color: var(--wb-forest-300);
+  color: var(--color-accent-forest);
   margin-top: var(--space-4);
 }
 
@@ -48,7 +48,7 @@
 }
 
 .bosco__cell--green {
-  fill: var(--wb-forest-300);
+  fill: var(--color-accent-forest);
 }
 
 .bosco__lbl {
@@ -63,9 +63,15 @@
 }
 
 .bosco__lbl--green {
-  fill: var(--wb-forest-300);
+  fill: var(--color-accent-forest);
 }
 
-.bosco__kicker em {
-  color: var(--wb-forest-300);
+p.bosco__kicker {
+  max-width: none;
+  white-space: nowrap;
+  color: var(--color-accent-forest);
+}
+
+p.bosco__kicker em {
+  color: var(--color-accent-forest);
 }
