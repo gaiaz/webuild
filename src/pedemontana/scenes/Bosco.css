@@ -72,6 +72,14 @@ p.bosco__kicker {
   color: var(--color-accent-forest);
 }
 
+/* Viewbox 660 unità, scalato a ~340px sotto i 768px: senza compenso il
+   font-size in px diventa illeggibile. */
+@media (max-width: 767px) {
+  .bosco__lbl {
+    font-size: 25px;
+  }
+}
+
 p.bosco__kicker em {
   color: var(--color-accent-forest);
 }

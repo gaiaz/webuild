@@ -177,3 +177,34 @@ circle.metodo__lamp-ring {
   font-size: var(--fs-10);
   max-width: 46ch;
 }
+
+/* Sotto i 768px la lista delle 4 fasi e l'illustrazione si impilano in
+   un'unica colonna (vedi .metodo__layout sopra): il contenuto
+   complessivo superava l'altezza della viewport durante il pin,
+   rendendo irraggiungibili corpo del testo e fondo dell'illustrazione.
+   Spaziature compresse e tavola più piccola per rientrare in 100vh. */
+@media (max-width: 767px) {
+  .metodo__inner {
+    gap: var(--space-4);
+    /* Il padding-top deve superare l'altezza del logo fisso in alto
+       (~85px), altrimenti il titolo ci finisce sotto. */
+    padding-block: 100px var(--space-4);
+  }
+
+  .metodo__title {
+    font-size: var(--fs-8);
+  }
+
+  .metodo__layout {
+    gap: var(--space-2);
+  }
+
+  .metodo__steps {
+    gap: var(--space-1);
+  }
+
+  .metodo__viz svg {
+    width: 58%;
+    margin-inline: auto;
+  }
+}

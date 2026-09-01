@@ -224,3 +224,22 @@
   text-transform: uppercase;
   fill: var(--color-text-night);
 }
+
+/* Le due tavole hanno viewbox 900 unità, l'intro 1200: scalate a
+   ~340px sotto i 768px il font-size in px diventa illeggibile. */
+@media (max-width: 767px) {
+  .smart-intro__lbl {
+    font-size: 42px;
+  }
+
+  .smart-plate__lbl {
+    font-size: 34px;
+  }
+
+  /* "carichi · vibrazioni · deformazioni · temperatura" è troppo lunga
+     per stare centrata su una riga a 34px nei 900 di viewbox: esce da
+     entrambi i lati. Solo per questa tavola serve un corpo più piccolo. */
+  .theme-night .smart-plate__lbl {
+    font-size: 22px;
+  }
+}

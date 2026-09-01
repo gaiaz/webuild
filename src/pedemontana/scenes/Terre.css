@@ -74,3 +74,23 @@
 .terre__kicker em {
   color: var(--color-accent);
 }
+
+/* Viewbox 1200 unità, scalato a ~340px sotto i 768px: senza compenso
+   il font-size in px diventa illeggibile. */
+@media (max-width: 767px) {
+  .terre__dest-num {
+    font-size: 52px;
+  }
+
+  .terre__lbl {
+    font-size: 45px;
+  }
+
+  /* Le etichette delle destinazioni partono da x="905" con appena 295
+     unità di viewBox libere fino al bordo: a 45px il testo più lungo
+     ("riambientazione delle cave") uscirebbe dall'illustrazione e
+     verrebbe tagliato dall'overflow:hidden della sezione. */
+  .terre__dest .terre__lbl {
+    font-size: 15px;
+  }
+}

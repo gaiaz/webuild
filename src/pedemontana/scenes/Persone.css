@@ -61,3 +61,13 @@ p.persone__kicker {
 .persone__kicker em {
   color: var(--color-accent);
 }
+
+/* La riga unica richiesta per il desktop non ci sta a 375px: la frase
+   intera eccede la larghezza e viene tagliata dall'overflow:hidden
+   della sezione. Sotto i 768px torna ad andare a capo normalmente. */
+@media (max-width: 767px) {
+  p.persone__kicker {
+    max-width: 28ch;
+    white-space: normal;
+  }
+}

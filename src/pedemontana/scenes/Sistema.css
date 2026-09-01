@@ -131,9 +131,44 @@ p.sistema__kicker {
   color: var(--color-accent);
 }
 
+/* La riga unica richiesta per il desktop (398px) eccede i 375px di un
+   telefono ed esce tagliata da entrambi i lati: sotto i 768px torna
+   ad andare a capo. */
+@media (max-width: 767px) {
+  p.sistema__kicker {
+    max-width: 26ch;
+    white-space: normal;
+    text-wrap: wrap;
+  }
+}
+
 [data-motion='reduced'] .sistema__map :is(
   .sistema__leader, .sistema__place,
   .sistema__letter, .sistema__branch, .sistema__branch-pill, .sistema__branch-lbl
 ) {
   opacity: 1;
+}
+
+/* Viewbox 1200 unità, scalato a ~340px sotto i 768px: senza compenso
+   il font-size in px diventa illeggibile. */
+@media (max-width: 767px) {
+  .sistema__letter {
+    font-size: 56px;
+  }
+
+  .sistema__compass {
+    font-size: 45px;
+  }
+
+  /* Le 6 città sono fitte lungo l'asse: a 45px il testo più stretto tra
+     due nomi consecutivi (Cassano → Lentate, appena 68 unità libere)
+     finisce per sovrapporsi al successivo. 22px è il massimo che regge
+     senza collisioni. */
+  .sistema__place {
+    font-size: 22px;
+  }
+
+  .sistema__branch-lbl {
+    font-size: 38px;
+  }
 }

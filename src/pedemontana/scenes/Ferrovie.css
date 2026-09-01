@@ -100,3 +100,12 @@
   font-size: var(--fs-10);
   max-width: 46ch;
 }
+
+/* Viewbox 1200 unità, scalato a ~340px sotto i 768px: senza compenso
+   il font-size in px diventa illeggibile. */
+@media (max-width: 767px) {
+  .ferrovie__box-lbl,
+  .annotation-svg {
+    font-size: 45px;
+  }
+}

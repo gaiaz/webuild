@@ -127,3 +127,13 @@
   font-size: var(--fs-10);
   max-width: 46ch;
 }
+
+/* Le etichette sono disegnate nel viewBox dell'SVG (1200 unità, pensato
+   per schermi larghi): sotto i 768px l'illustrazione si scala fino a
+   ~340px e lo stesso font-size in px si rimpicciolisce con lei,
+   diventando illeggibile. Qui si compensa restando dentro il viewBox. */
+@media (max-width: 767px) {
+  .beneficio__lbl {
+    font-size: 45px;
+  }
+}

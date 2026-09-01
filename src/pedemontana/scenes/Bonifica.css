@@ -73,3 +73,23 @@
   font-size: var(--fs-10);
   max-width: 52ch;
 }
+
+/* Sotto i 768px le 4 fasi si impilano in colonna (vedi .bonifica__phases
+   sopra): il contenuto complessivo superava l'altezza della viewport
+   durante il pin. Spaziature compresse per rientrare in 100vh. */
+@media (max-width: 767px) {
+  .bonifica__inner {
+    gap: var(--space-4);
+    /* Il padding-top deve superare l'altezza del logo fisso in alto
+       (~85px), altrimenti kicker e titolo ci finiscono sotto. */
+    padding-block: 100px var(--space-4);
+  }
+
+  .bonifica__title {
+    font-size: var(--fs-8);
+  }
+
+  .bonifica__phases {
+    gap: var(--space-2);
+  }
+}

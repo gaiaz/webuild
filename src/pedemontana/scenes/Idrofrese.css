@@ -135,3 +135,12 @@
   font-size: var(--fs-10);
   max-width: 46ch;
 }
+
+/* Viewbox 760 unità, scalato a ~340px sotto i 768px: senza compenso
+   il font-size in px diventa illeggibile. */
+@media (max-width: 767px) {
+  .idrofrese__ceppo-lbl,
+  .idrofrese__tick text {
+    font-size: 29px;
+  }
+}

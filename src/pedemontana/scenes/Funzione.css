@@ -94,3 +94,11 @@
 ) {
   opacity: 1;
 }
+
+/* Viewbox 1200 unità, scalato a ~340px sotto i 768px: senza compenso
+   il font-size in px diventa illeggibile. */
+@media (max-width: 767px) {
+  .funzione__lbl {
+    font-size: 45px;
+  }
+}
