@@ -42,28 +42,32 @@ const through = (nodes, t) => {
 
 /* ─── le geometrie della storia, in ordine di racconto ─── */
 const SHAPES = [
-  { id: 'apertura', caption: null, f: () => MIDY },
+  { id: 'apertura', num: null, label: null, f: () => MIDY },
   {
     id: 'asse',
-    caption: "l'asse — 87 km da ovest a est",
+    num: '87 km',
+    label: 'da ovest a est',
     f: (t) => through([[0, 122], [0.22, 134], [0.4, 144], [0.52, 150], [0.7, 140], [1, 178]], t),
   },
   {
     id: 'sotto',
-    caption: "sotto la superficie — 23,4 km interrati",
+    num: '23,4 km',
+    label: 'interrati',
     f: (t) => MIDY + 108 * plateau(t, 0.2, 0.78, 0.11),
   },
   {
     id: 'ferrovie',
-    caption: 'tre linee ferroviarie, mai interrotte',
+    num: '3',
+    label: 'linee ferroviarie, mai interrotte',
     f: (t) => MIDY + 76 * plateau(t, 0.4, 0.6, 0.014),
   },
   {
     id: 'sensori',
-    caption: 'una strada che conosce il proprio stato',
+    num: null,
+    label: 'una strada che conosce il proprio stato',
     f: (t) => MIDY - 66 * (spike(t, 0.28) + spike(t, 0.52) + spike(t, 0.76)),
   },
-  { id: 'unica', caption: null, f: () => MIDY },
+  { id: 'unica', num: null, label: null, f: () => MIDY },
 ]
 
 const sample = (f) =>
@@ -78,6 +82,10 @@ const PATHS = POINTS.map(toPath)
 
 // echi: le forme attraversate restano come tracce in filigrana
 const ECHOES = SHAPES.slice(1, 5).map((s, i) => ({ id: s.id, d: PATHS[i + 1] }))
+
+// il righello: quote ogni ~7 km sull'asse degli 87 km complessivi
+const RULER_Y = MIDY + 122
+const RULER_TICKS = Array.from({ length: 13 }, (_, i) => X0 + (i / 12) * (X1 - X0))
 
 const Chiusura = () => {
   const rootRef = useRef(null)
@@ -108,21 +116,22 @@ const Chiusura = () => {
 
       tl.set('.chiusura__echo, .chiusura__caption', { opacity: 0 }, 0)
         .set('.chiusura__claim, .chiusura__way, .chiusura__brand', { opacity: 0 }, 0)
-        .fromTo('.chiusura__line', { opacity: 0 }, { opacity: 1, duration: 0.5 })
+        .fromTo('.chiusura__line, .chiusura__ruler', { opacity: 0 }, { opacity: 1, duration: 0.5 })
 
-      // la linea ripercorre le geometrie della storia
+      // la linea ripercorre le geometrie della storia — ogni didascalia
+      // resta leggibile a lungo prima di lasciare spazio alla successiva
       SHAPES.slice(1).forEach((shape, i) => {
         morph(i, i + 1, 1.1, i === 0 ? '>-0.2' : '>+0.35')
-        if (shape.caption) {
+        if (shape.label) {
           tl.to(`.chiusura__caption--${shape.id}`, { opacity: 1, duration: 0.3 }, '<0.25')
             .to(`.chiusura__echo--${shape.id}`, { opacity: 0.5, duration: 0.5 }, '<')
-            .to(`.chiusura__caption--${shape.id}`, { opacity: 0, duration: 0.3 }, '>+0.15')
+            .to(`.chiusura__caption--${shape.id}`, { opacity: 0, duration: 0.4 }, '>+0.9')
         }
       })
 
       tl
         // tutto si distende: gli echi si spengono, resta una linea sola
-        .to('.chiusura__echo', { opacity: 0.12, duration: 0.8 }, '>-0.3')
+        .to('.chiusura__echo, .chiusura__ruler', { opacity: 0.12, duration: 0.8 }, '>-0.3')
         .to('.chiusura__line', { strokeWidth: 9, duration: 0.8 }, '<')
         .fromTo(
           '.chiusura__sweep',
@@ -142,7 +151,7 @@ const Chiusura = () => {
         .fromTo('.chiusura__brand', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7 }, '+=0.3')
         .to({}, { duration: 0.8 })
     },
-    { end: '+=620%' }
+    { end: '+=680%' }
   )
 
   return (
@@ -154,8 +163,14 @@ const Chiusura = () => {
       aria-labelledby="chiusura-title"
     >
       <div className="chiusura__inner container">
-        <div className="chiusura__stage" aria-hidden="true">
+        <div className="chiusura__stage scene-phase" aria-hidden="true">
           <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid meet">
+            <g className="chiusura__ruler">
+              {RULER_TICKS.map((x) => (
+                <line key={x} className="chiusura__ruler-tick" x1={x} y1={RULER_Y - 5} x2={x} y2={RULER_Y + 5} />
+              ))}
+              <line className="chiusura__ruler-base" x1={X0} y1={RULER_Y} x2={X1} y2={RULER_Y} />
+            </g>
             {ECHOES.map((e) => (
               <path key={e.id} className={`chiusura__echo chiusura__echo--${e.id}`} d={e.d} />
             ))}
@@ -164,34 +179,37 @@ const Chiusura = () => {
           </svg>
 
           <p className="chiusura__captions">
-            {SHAPES.filter((s) => s.caption).map((s) => (
-              <span key={s.id} className={`chiusura__caption chiusura__caption--${s.id} annotation`}>
-                {s.caption}
+            {SHAPES.filter((s) => s.label).map((s) => (
+              <span key={s.id} className={`chiusura__caption chiusura__caption--${s.id}`}>
+                {s.num && <span className="chiusura__caption-num">{s.num}</span>}
+                <span className="chiusura__caption-label">{s.label}</span>
               </span>
             ))}
           </p>
         </div>
 
-        <h2 id="chiusura-title" className="chiusura__claims">
-          <span className="chiusura__claim chiusura__claim--one display">
-            Autostrada Pedemontana Lombarda.
-          </span>
-          <span className="chiusura__claim chiusura__claim--two display">
-            Un nuovo modo di connettere
-            <br />
-            persone, imprese e futuro.
-          </span>
-        </h2>
+        <div className="chiusura__card scene-phase">
+          <h2 id="chiusura-title" className="chiusura__claims">
+            <span className="chiusura__claim chiusura__claim--one display">
+              Autostrada Pedemontana Lombarda.
+            </span>
+            <span className="chiusura__claim chiusura__claim--two display">
+              Un nuovo modo di connettere
+              <br />
+              persone, imprese e futuro.
+            </span>
+          </h2>
 
-        <p className="chiusura__way display">My New Way</p>
+          <p className="chiusura__way display">My New Way</p>
 
-        <img
-          className="chiusura__brand"
-          src="/webuild-logo.svg"
-          alt="Webuild"
-          width="119"
-          height="33"
-        />
+          <img
+            className="chiusura__brand"
+            src="/webuild-logo.svg"
+            alt="Webuild"
+            width="119"
+            height="33"
+          />
+        </div>
       </div>
     </section>
 

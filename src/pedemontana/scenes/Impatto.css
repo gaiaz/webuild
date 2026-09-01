@@ -1,11 +1,17 @@
 .impatto {
-  padding-block: var(--space-32);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--color-bg-subtle);
 }
 
 .impatto__inner {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
+  padding-block: var(--space-16);
 }
 
 .impatto__title {

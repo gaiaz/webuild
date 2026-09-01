@@ -29,13 +29,6 @@ const TRACE_D = `M ${DOTS.filter((d) => d.onTrace)
   .map((d) => `${d.x} ${d.y}`)
   .join(' L ')}`
 
-const FIGURES = [31, 63, 92].map((i) => DOTS[i])
-
-const personPath = (x, y) =>
-  `M ${x} ${y - 26} a 8 8 0 1 1 0.01 0
-   M ${x} ${y - 10} v 20 M ${x} ${y - 6} l -10 10 M ${x} ${y - 6} l 10 10
-   M ${x} ${y + 10} l -7 16 M ${x} ${y + 10} l 7 16`
-
 const Persone = () => {
   const rootRef = useRef(null)
   const countRef = useRef(null)
@@ -45,8 +38,7 @@ const Persone = () => {
     ({ tl, root }) => {
       const counter = { v: 0 }
       prepStroke(tl, '.persone__trace', root)
-        prepStroke(tl, '.persone__figure', root)
-        .to(counter, {
+      tl.to(counter, {
           v: PEDE.personePicco,
           duration: 1.6,
           onUpdate: () => {
@@ -68,8 +60,6 @@ const Persone = () => {
         // il tracciato si compone attraverso le persone
         .to('.persone__trace', { strokeDashoffset: 0, duration: 1.6 }, '+=0.3')
         .to('.persone__dot--trace', { fill: 'var(--color-accent)', r: 5, duration: 1.2 }, '<0.2')
-        // alcuni punti diventano figure
-        .to('.persone__figure', { strokeDashoffset: 0, duration: 0.9, stagger: 0.18 }, '+=0.2')
         .fromTo('.persone__kicker', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, '+=0.3')
         .to({}, { duration: 0.5 })
     },
@@ -106,13 +96,6 @@ const Persone = () => {
                 cx={d.x}
                 cy={d.y}
                 r="3.4"
-              />
-            ))}
-            {FIGURES.map((d) => (
-              <path
-                key={d.i}
-                className="persone__figure"
-                d={personPath(d.x, d.y - 34)}
               />
             ))}
           </svg>

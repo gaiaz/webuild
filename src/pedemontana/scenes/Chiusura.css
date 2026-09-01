@@ -6,30 +6,53 @@
   overflow: hidden;
 }
 
-/* Contenuto pinnato: deve stare dentro la viewport a qualunque altezza,
-   altrimenti la coda resta irraggiungibile. Le misure sono quindi limitate
-   anche in vh, non solo dalla scala tipografica fluida. */
+/* Due fasi, non quattro: la linea e la "carta" di chiusura (claim +
+   My New Way + logo, che restano insieme in accumulo) occupano lo
+   stesso centro della pagina invece di impilarsi in colonna — da sole
+   riservavano spazio anche da invisibili, spingendo la linea animata
+   in alto e lontano dal centro reale della viewport. Dentro la carta,
+   claim/way/logo restano in flusso normale fra loro: si accumulano a
+   fine scena come un vero title card, non si sostituiscono a vicenda. */
 .chiusura__inner {
+  position: relative;
+  width: 100%;
+  height: min(58vh, 600px);
+  text-align: center;
+  padding-block: var(--space-12);
+}
+
+.chiusura__stage,
+.chiusura__card {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: var(--space-4);
-  padding-block: var(--space-12);
+  justify-content: center;
+}
+
+.chiusura__card {
+  gap: var(--space-6);
+}
+
+.chiusura__claims {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+[data-motion='reduced'] .chiusura__inner {
+  height: auto;
 }
 
 /* ─── La linea che ripercorre la storia ─── */
 .chiusura__stage {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
 }
 
 .chiusura__stage svg {
   width: 100%;
-  height: min(22vh, 280px);
+  height: min(24vh, 300px);
 }
 
 .chiusura__line {
@@ -47,6 +70,17 @@
   fill: none;
 }
 
+/* Il righello sotto la linea: la quota degli 87 km, in scala */
+.chiusura__ruler-tick {
+  stroke: var(--color-border);
+  stroke-width: 1.5;
+}
+
+.chiusura__ruler-base {
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
 /* Il colpo di coda: la linea si estende oltre i margini */
 .chiusura__sweep {
   stroke: var(--color-accent);
@@ -54,17 +88,42 @@
   opacity: 0;
 }
 
-/* Slot unico per le didascalie: si alternano senza spostare il layout */
+/* Slot unico per le didascalie: si alternano senza spostare il layout.
+   Stessa famiglia display delle scene precedenti, non più mono — numero
+   in rosso e didascalia in grigio, per leggerle al volo durante lo scroll. */
 .chiusura__captions {
   position: relative;
-  height: 1.6em;
+  height: 2.2em;
   width: 100%;
 }
 
 .chiusura__caption {
   position: absolute;
   inset: 0;
-  display: block;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chiusura__caption-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-stretch: 82%;
+  letter-spacing: -0.01em;
+  font-size: var(--fs-8);
+  color: var(--color-accent);
+}
+
+.chiusura__caption-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-stretch: 80%;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: var(--fs-12);
+  color: var(--color-text-secondary);
 }
 
 [data-motion='reduced'] .chiusura__caption {
@@ -74,16 +133,12 @@
 
 [data-motion='reduced'] .chiusura__captions {
   height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 /* ─── Il claim ─── */
-.chiusura__claims {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  margin-top: var(--space-8);
-}
-
 .chiusura__claim {
   display: block;
   font-size: min(var(--fs-8), 5vh);
@@ -98,13 +153,11 @@
   font-size: min(var(--fs-3), 13vh);
   color: var(--color-accent);
   letter-spacing: -0.01em;
-  margin-top: var(--space-2);
 }
 
 .chiusura__brand {
   width: min(clamp(148px, 16vw, 248px), 42vh);
   height: auto;
-  margin-top: var(--space-4);
 }
 
 /* I crediti vivono fuori dal pin: scroll normale, la pagina può finire */
@@ -124,7 +177,7 @@
 }
 
 [data-motion='reduced'] .chiusura__inner :is(
-  .chiusura__echo, .chiusura__claim, .chiusura__way, .chiusura__brand
+  .chiusura__echo, .chiusura__ruler, .chiusura__claim, .chiusura__way, .chiusura__brand
 ) {
   opacity: 1;
 }

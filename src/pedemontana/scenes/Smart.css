@@ -1,5 +1,14 @@
 .smart__intro {
-  padding-block: var(--space-32) var(--space-24);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--color-bg-tint);
+}
+
+.smart__intro .container {
+  padding-block: var(--space-16);
 }
 
 .smart__title {
@@ -8,26 +17,108 @@
 }
 
 .smart__sub {
-  color: var(--color-text-night);
+  color: var(--color-text-secondary);
   max-width: 44ch;
   font-size: var(--fs-10);
 }
 
-.smart__stack {
-  display: flex;
-  flex-direction: column;
+/* ─── Illustrazione dell'intro: la strada fisica diventa segnale ─── */
+.smart-intro__viz {
+  margin-top: var(--space-12);
 }
 
-/* Pannelli sticky che si impilano. Il contenuto è centrato verticalmente:
-   testo e tavola convivono in due colonne invece di ammassarsi in basso. */
+.smart-intro__viz svg {
+  width: 100%;
+  height: auto;
+}
+
+.smart-intro__road {
+  stroke: var(--color-text-secondary);
+  stroke-width: 6;
+}
+
+.smart-intro__signal {
+  stroke: var(--color-accent);
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+}
+
+.smart-intro__hinge {
+  fill: var(--color-bg-base);
+  stroke: var(--color-text-primary);
+  stroke-width: 2;
+}
+
+.smart-intro__node {
+  fill: var(--color-accent);
+}
+
+.smart-intro__ping {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2;
+}
+
+.smart-intro__bar {
+  fill: var(--color-accent);
+}
+
+.smart-intro__trend {
+  stroke: var(--color-text-primary);
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.smart-intro__lbl {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--color-text-secondary);
+}
+
+/* Blocco normale, non più flex: i due pannelli sono ora sezioni
+   pinnate da GSAP (che inserisce un pin-spacer per sezione) invece di
+   figli sticky-stack — il flex-column impediva al pin-spacer di
+   allungarsi per tutta la durata reale del pin. */
+.smart__stack {
+  display: block;
+}
+
+/* Pannelli pinnati in sequenza (non più sticky-stack): con lo sticky-stack
+   il pannello successivo iniziava a ricoprire dal basso mentre l'illustrazione
+   era ancora a metà — lo scroll deve restare fermo sul pannello corrente
+   finché il disegno non è completo. Il contenuto resta centrato
+   verticalmente: testo e tavola in due colonne invece di ammassarsi in basso. */
 .smart__panel {
-  position: sticky;
-  top: 0;
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
   border-top: 1px solid var(--color-border-night);
+}
+
+/* Pannello "Big data e grandi opportunità": registro chiaro invece
+   del tema notte condiviso dagli altri pannelli sticky. */
+.smart__panel--light {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+  border-top-color: var(--color-border);
+}
+
+.smart__panel--light .smart-plate__stroke {
+  stroke: var(--color-text-primary);
+}
+
+.smart__panel--light .smart-plate__hair {
+  stroke: var(--color-border);
+}
+
+.smart__panel--light .smart-plate__lbl {
+  fill: var(--color-text-secondary);
 }
 
 .smart__layout {
@@ -108,6 +199,21 @@
 }
 
 .smart-plate__sensor {
+  fill: var(--color-accent);
+}
+
+/* Portale free flow: struttura piena (base, trave) al posto del
+   solo profilo, telecamere con lente attiva, veicolo con ruote e
+   antenna — il rosso resta riservato al dato/segnale, mai alla
+   struttura fisica. */
+.smart-plate__footing,
+.smart-plate__beam,
+.smart-plate__wheel {
+  fill: var(--color-text-primary);
+}
+
+.smart-plate__lens,
+.smart-plate__antenna {
   fill: var(--color-accent);
 }
 
